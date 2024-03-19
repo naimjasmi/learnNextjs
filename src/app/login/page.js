@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from "next/navigation";
-import footer from "../components/footer"
 import(useRouter)
 export default function LoginPage() { 
 
