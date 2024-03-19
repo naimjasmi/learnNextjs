@@ -11,7 +11,6 @@ export default function DashboardPage(){
                 <Link href="/activity" scroll={false}> Activity</Link>
                 <Link href="/workgroups" scroll={false}> Workgroup</Link>
             </div>
-            <Footer/>
 
         </div>
         
