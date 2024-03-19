@@ -44,21 +44,6 @@
     background-color: #e9e9e9;
 }
 
-.navigation-links {
-    margin-top: 30px;
-}
-
-.navigation-links a {
-    margin-right: 20px;
-    text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
-}
-
-.navigation-links a:hover {
-    color: #0056b3;
-}
-
 .form-wrapper {
     margin-top: 30px;
 }
@@ -112,4 +97,35 @@
 
 .form button:hover {
     background-color: #0056b3;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.sidebar-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-item {
+    margin-bottom: 10px;
+}
+
+.sidebar-item a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.sidebar-item a:hover {
+    color: #007bff;
 }

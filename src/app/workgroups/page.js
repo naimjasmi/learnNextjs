@@ -1,9 +1,8 @@
 import Link from "next/link";
 import styles from "./workgroups.module.css";
 
-
 async function getData() {
-    const res = await fetch('http://172.16.1.189:8000/workgroups/');
+    const res = await fetch('http://172.16.1.100:8000/workgroups/');
     if (!res.ok) {
         throw new Error('Failed to fetch data');
     }
@@ -44,15 +43,22 @@ export default async function WorkgroupsPage() {
                             <input type="text" placeholder="Name" />
                             <input type="text" placeholder="ID" />
                             <textarea placeholder="Description"></textarea>
-                            <button type="submit">Submit</button>
+                            <button type="submit">Add</button>
                         </form>
                     </div>
                 </div>
-                <div className={styles['navigation-links']}>
-                    <Link href="/activity" scroll={false}>Activity</Link>
-                    <Link href="/workgroups" scroll={false}>Workgroup</Link>
-                </div>
             </div>
+            <nav className={styles['sidebar']}>
+                <ul className={styles['sidebar-list']}>
+                <h2>Menu</h2><br/>
+                    <li className={styles['sidebar-item']}>
+                        <Link href="/activity" scroll={false}>Activity</Link>
+                    </li>
+                    <li className={styles['sidebar-item']}>
+                        <Link href="/workgroups" scroll={false}>Workgroup</Link>
+                    </li>
+                </ul>
+            </nav>
         </>
     );
 }
