@@ -1,17 +1,53 @@
-import Link from "next/link";
-import styles from "./workgroups.module.css";
+"use client";
 
+import Link from 'next/link';
+import styles from './workgroups.module.css';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-async function getData() {
-    const res = await fetch('http://172.16.1.189:8000/workgroups/');
-    if (!res.ok) {
-        throw new Error('Failed to fetch data');
-    }
-    return res.json();
-}
+// Wrap your component with "useClient"
+export default function WorkgroupsPage() {
 
-export default async function WorkgroupsPage() {
-    const data = await getData();
+    // Now you can safely use useState and useEffect here
+    const [data, setData] = useState([]);
+    const [name, setName] = useState('');
+    const [wgid, setWgid] = useState('');
+    const [description, setDescription] = useState('');
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const { data: res } = await axios.get('http://172.16.1.117:8000/workgroups/');
+                setData(res);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+        fetchData();
+    }, []);
+
+    const addWorkgroup = async ({ name, wgid, description }) => {
+        try {
+            const response = await axios.post('http://172.16.1.117:8000/workgroups/', { name, wgid, description });
+            return response.data; // Assuming the API returns the newly added workgroup data
+        } catch (error) {
+            throw new Error('Failed to add workgroup: ' + error.message);
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const newWorkgroup = await addWorkgroup({ name, wgid, description });
+            setData([...data, newWorkgroup]);
+            setName('');
+            setWgid('');
+            setDescription('');
+        } catch (error) {
+            console.error('Error adding workgroup:', error);
+        }
+    };
+
 
     return (
         <>
@@ -27,7 +63,7 @@ export default async function WorkgroupsPage() {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map((wg, index) => (
+                            {data.length !== 0 && data.map((wg, index) => (
                                 <tr key={index} className={index % 2 === 0 ? styles.even : styles.odd}>
                                     <td>{wg.name}</td>
                                     <td>{wg.wgid}</td>
@@ -39,20 +75,27 @@ export default async function WorkgroupsPage() {
                 </div>
                 <div className={styles['form-wrapper']}>
                     <div className={styles.card}>
-                        <form className={styles.form}>
+                        <form className={styles.form} onSubmit={handleSubmit}>
                             <h2>Add New Workgroup</h2>
-                            <input type="text" placeholder="Name" />
-                            <input type="text" placeholder="ID" />
-                            <textarea placeholder="Description"></textarea>
-                            <button type="submit">Submit</button>
+                            <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                            <input type="text" placeholder="ID" value={wgid} onChange={(e) => setWgid(e.target.value)} />
+                            <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                            <button type="submit">Add</button>
                         </form>
                     </div>
                 </div>
-                <div className={styles['navigation-links']}>
-                    <Link href="/activity" scroll={false}>Activity</Link>
-                    <Link href="/workgroups" scroll={false}>Workgroup</Link>
-                </div>
             </div>
+            <nav className={styles['sidebar']}>
+                <ul className={styles['sidebar-list']}>
+                    <h2>Menu</h2><br />
+                    <li className={styles['sidebar-item']}>
+                        <Link href="/activity" scroll={false}>Activity</Link>
+                    </li>
+                    <li className={styles['sidebar-item']}>
+                        <Link href="/workgroups" scroll={false}>Workgroup</Link>
+                    </li>
+                </ul>
+            </nav>
         </>
     );
 }
