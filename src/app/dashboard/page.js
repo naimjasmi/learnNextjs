@@ -1,6 +1,5 @@
 import UserCard from "./usercard"
 import Link from "next/link"
-import Footer from "../components/footer"
 export default function DashboardPage(){
     return(
         <div>
