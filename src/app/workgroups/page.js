@@ -5,34 +5,52 @@ import styles from './workgroups.module.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-// Wrap your component with "useClient"
 export default function WorkgroupsPage() {
-
-    // Now you can safely use useState and useEffect here
     const [data, setData] = useState([]);
     const [name, setName] = useState('');
     const [wgid, setWgid] = useState('');
     const [description, setDescription] = useState('');
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                const { data: res } = await axios.get('http://172.16.1.117:8000/workgroups/');
-                setData(res);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
         fetchData();
     }, []);
+
+    const fetchData = async () => {
+        try {
+            const { data: res } = await axios.get('http://172.16.1.117:8000/workgroups/');
+            setData(res);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
     const addWorkgroup = async ({ name, wgid, description }) => {
         try {
             const response = await axios.post('http://172.16.1.117:8000/workgroups/', { name, wgid, description });
-            return response.data; // Assuming the API returns the newly added workgroup data
+            return response.data;
         } catch (error) {
             throw new Error('Failed to add workgroup: ' + error.message);
         }
+    };
+
+    const deleteWorkgroup = async (id) => {
+        try {
+            await axios.delete(`http://172.16.1.117:8000/workgroups/${id}`);
+            setData(data.filter(workgroup => workgroup.id !== id));
+        } catch (error) {
+            console.error('Error deleting workgroup:', error);
+        }
+    };
+
+    const handleDelete = (id) => {
+        if (window.confirm('Are you sure you want to delete this workgroup?')) {
+            deleteWorkgroup(id);
+        }
+    };
+
+    const handleEdit = (id) => {
+        // Handle edit action here, you can navigate to an edit page or show a modal for editing
+        console.log('Editing workgroup with id:', id);
     };
 
     const handleSubmit = async (e) => {
@@ -48,7 +66,6 @@ export default function WorkgroupsPage() {
         }
     };
 
-
     return (
         <>
             <div className={styles.container}>
@@ -60,6 +77,7 @@ export default function WorkgroupsPage() {
                                 <th>Name</th>
                                 <th>ID</th>
                                 <th>Description</th>
+                                <th>Actions</th> {/* New column for actions */}
                             </tr>
                         </thead>
                         <tbody>
@@ -68,6 +86,10 @@ export default function WorkgroupsPage() {
                                     <td>{wg.name}</td>
                                     <td>{wg.wgid}</td>
                                     <td>{wg.description}</td>
+                                    <td>
+                                        <button className="edit" onClick={() => handleEdit(wg.id)}>Edit</button>
+                                        <button className="delete" onClick={() => handleDelete(wg.id)}>Delete</button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
