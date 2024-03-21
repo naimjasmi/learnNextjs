@@ -9,18 +9,21 @@
     font-weight: bold;
     margin-bottom: 20px;
     color: #333;
+    margin-left: 220px; 
+    max-width: calc(100% - 240px); 
 }
 
 .table-wrapper {
     text-align: center;
+    margin-left: 220px; 
 }
 
 .workgroup-table {
-    width: 100%;
+    width: 120%;
     border-collapse: collapse;
     border: 1px solid #ddd;
     border-radius: 5px;
-    overflow: hidden;
+    overflow-x: auto;
     margin: 0 auto;
 }
 
@@ -46,6 +49,8 @@
 
 .form-wrapper {
     margin-top: 30px;
+    margin-left: 220px; 
+    max-width: calc(100% - 240px); 
 }
 
 .card {
@@ -129,3 +134,23 @@
 .sidebar-item a:hover {
     color: #007bff;
 }
+
+.button {
+    width: 100px; /* Set the width as needed */
+    padding: 10px; /* Add padding to adjust the button size */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.edit {
+    background-color: #002ead;
+    color: white;
+}
+
+.delete {
+    background-color: rgb(187, 0, 0);
+    color: white;
+}
+

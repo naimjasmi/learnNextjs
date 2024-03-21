@@ -17,7 +17,7 @@ export default function WorkgroupsPage() {
 
     const fetchData = async () => {
         try {
-            const { data: res } = await axios.get('http://172.16.1.117:8000/workgroups/');
+            const { data: res } = await axios.get('http://172.16.1.132:8000/workgroups/');
             setData(res);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -26,31 +26,32 @@ export default function WorkgroupsPage() {
 
     const addWorkgroup = async ({ name, wgid, description }) => {
         try {
-            const response = await axios.post('http://172.16.1.117:8000/workgroups/', { name, wgid, description });
+            const response = await axios.post('http://172.16.1.132:8000/workgroups/', { name, wgid, description });
             return response.data;
         } catch (error) {
             throw new Error('Failed to add workgroup: ' + error.message);
         }
     };
 
-    const deleteWorkgroup = async (id) => {
+    const deleteWorkgroup = async (id) => { // Change parameter name to id
         try {
-            await axios.delete(`http://172.16.1.117:8000/workgroups/${id}`);
-            setData(data.filter(workgroup => workgroup.id !== id));
+            const response = await axios.delete(`http://172.16.1.132:8000/workgroups/${id}`); 
+            setData(data.filter(workgroup => workgroup.id !== id)); // Filter based on id
+            return response.data;
         } catch (error) {
             console.error('Error deleting workgroup:', error);
         }
     };
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => { // Use async as deleteWorkgroup is async
         if (window.confirm('Are you sure you want to delete this workgroup?')) {
-            deleteWorkgroup(id);
+            try {
+                await deleteWorkgroup(id);
+                setData(data.filter(workgroup => workgroup.id !== id)); // Update list after deletion
+            } catch (error) {
+                console.error('Error deleting workgroup:', error);
+            }
         }
-    };
-
-    const handleEdit = (id) => {
-        // Handle edit action here, you can navigate to an edit page or show a modal for editing
-        console.log('Editing workgroup with id:', id);
     };
 
     const handleSubmit = async (e) => {
@@ -77,7 +78,7 @@ export default function WorkgroupsPage() {
                                 <th>Name</th>
                                 <th>ID</th>
                                 <th>Description</th>
-                                <th>Actions</th> {/* New column for actions */}
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -87,8 +88,9 @@ export default function WorkgroupsPage() {
                                     <td>{wg.wgid}</td>
                                     <td>{wg.description}</td>
                                     <td>
-                                        <button className="edit" onClick={() => handleEdit(wg.id)}>Edit</button>
-                                        <button className="delete" onClick={() => handleDelete(wg.id)}>Delete</button>
+                                        <button className={`${styles.button} ${styles.edit}`} onClick={() => handleEdit(wg.id)}>Edit</button>
+                                        <button className={`${styles.button} ${styles.delete}`} onClick={() => handleDelete(wg.id)}>Delete</button>
+
                                     </td>
                                 </tr>
                             ))}
@@ -110,6 +112,9 @@ export default function WorkgroupsPage() {
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
                     <h2>Menu</h2><br />
+                    <li className={styles['sidebar-item']}>
+                        <Link href="/dashboard" scroll={false}>Dashboard</Link>
+                    </li>
                     <li className={styles['sidebar-item']}>
                         <Link href="/activity" scroll={false}>Activity</Link>
                     </li>
