@@ -35,7 +35,7 @@ export default function WorkgroupsPage() {
 
     const deleteWorkgroup = async (id) => { // Change parameter name to id
         try {
-            const response = await axios.delete(`http://172.16.1.132:8000/workgroups/${id}`); 
+            const response = await axios.delete(`http://172.16.1.132:8000/workgroups/${id}`); // Use id in the URL
             setData(data.filter(workgroup => workgroup.id !== id)); // Filter based on id
             return response.data;
         } catch (error) {
@@ -46,12 +46,17 @@ export default function WorkgroupsPage() {
     const handleDelete = async (id) => { // Use async as deleteWorkgroup is async
         if (window.confirm('Are you sure you want to delete this workgroup?')) {
             try {
-                await deleteWorkgroup(id);
-                setData(data.filter(workgroup => workgroup.id !== id)); // Update list after deletion
+                await deleteWorkgroup(id); // Wait for deletion to complete
+                setData(data.filter(workgroup => workgroup.id !== id)); // Update data state after deletion
             } catch (error) {
                 console.error('Error deleting workgroup:', error);
             }
         }
+    };
+
+    const handleEdit = (id) => {
+        // Handle edit action
+        console.log('Editing workgroup with id:', id);
     };
 
     const handleSubmit = async (e) => {
@@ -90,7 +95,6 @@ export default function WorkgroupsPage() {
                                     <td>
                                         <button className={`${styles.button} ${styles.edit}`} onClick={() => handleEdit(wg.id)}>Edit</button>
                                         <button className={`${styles.button} ${styles.delete}`} onClick={() => handleDelete(wg.id)}>Delete</button>
-
                                     </td>
                                 </tr>
                             ))}
@@ -113,9 +117,6 @@ export default function WorkgroupsPage() {
                 <ul className={styles['sidebar-list']}>
                     <h2>Menu</h2><br />
                     <li className={styles['sidebar-item']}>
-                        <Link href="/dashboard" scroll={false}>Dashboard</Link>
-                    </li>
-                    <li className={styles['sidebar-item']}>
                         <Link href="/activity" scroll={false}>Activity</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
@@ -126,3 +127,4 @@ export default function WorkgroupsPage() {
         </>
     );
 }
+
