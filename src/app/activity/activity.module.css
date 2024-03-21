@@ -9,11 +9,13 @@
     font-weight: bold;
     margin-bottom: 20px;
     color: #333;
+    margin-left: 220px; 
+    max-width: calc(100% - 240px); 
 }
 
 .table-wrapper {
     text-align: center;
-    margin-left: 220px; /* Adjusted to accommodate the sidebar width */
+    margin-left: 220px; 
 }
 
 .workgroup-table {
@@ -47,6 +49,8 @@
 
 .form-wrapper {
     margin-top: 30px;
+    margin-left: 220px; 
+    max-width: calc(100% - 240px); 
 }
 
 .card {
