@@ -130,20 +130,21 @@ export default function WorkgroupsPage() {
                         </form>
                     </div>
                 </div>
-                {showEditForm && (
+                
+            </div>
+            {showEditForm && (
                     <div className={styles['edit-form-wrapper']}>
-                    <div className={styles.card}>
-                    <h2>Edit Workgroup</h2>
-                        <form onSubmit={handleSubmitEdit}>
-                            <input type="text" placeholder="Name" name="name" value={editData.name} onChange={handleEditDataChange} />
-                            <input type="text" placeholder="ID" name="wgid" value={editData.wgid} onChange={handleEditDataChange} />
-                            <textarea placeholder="Description" name="description" value={editData.description} onChange={handleEditDataChange}></textarea>
-                            <button type="submit">Save</button>
-                        </form>
-                    </div>
+                        <div className={styles.card}>
+                            <h2>Edit Workgroup</h2>
+                            <form className={styles.form} onSubmit={handleSubmitEdit}>
+                                <input type="text" placeholder="Name" name="name" value={editData.name} onChange={handleEditDataChange} />
+                                <input type="text" placeholder="ID" name="wgid" value={editData.wgid} onChange={handleEditDataChange} />
+                                <textarea placeholder="Description" name="description" value={editData.description} onChange={handleEditDataChange}></textarea>
+                                <button type="submit">Save</button>
+                            </form>
+                        </div>
                     </div>
                 )}
-            </div>
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
                     <h2>Menu</h2><br />
