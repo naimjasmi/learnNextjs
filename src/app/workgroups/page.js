@@ -1,15 +1,18 @@
+
 "use client";
 
-import Link from 'next/link';
-import styles from './workgroups.module.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
+import styles from './workgroups.module.css';
 
 export default function WorkgroupsPage() {
     const [data, setData] = useState([]);
     const [name, setName] = useState('');
     const [wgid, setWgid] = useState('');
     const [description, setDescription] = useState('');
+    const [showEditForm, setShowEditForm] = useState(false);
+    const [editData, setEditData] = useState({});
 
     useEffect(() => {
         fetchData();
@@ -35,28 +38,45 @@ export default function WorkgroupsPage() {
 
     const deleteWorkgroup = async (id) => {
         try {
-            const response = await axios.delete(`http://172.16.1.132:8000/workgroups/${id}/`); // delete using id
-            //setData(data.filter(workgroup => workgroup.id !== id)); // Filter based on id
-            //return response.data;
+            await axios.delete(`http://172.16.1.132:8000/workgroups/${id}/`);
+            setData(data.filter(workgroup => workgroup.id !== id));
         } catch (error) {
             console.error('Error deleting workgroup:', error);
         }
     };
 
-    const handleDelete = async (id) => { // Use async as deleteWorkgroup is async
+    const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this workgroup?')) {
             try {
-                await deleteWorkgroup(id); 
-                setData(data.filter(workgroup => workgroup.id !== id)); // Update list data after deletion
+                await deleteWorkgroup(id);
             } catch (error) {
                 console.error('Error deleting workgroup:', error);
             }
         }
     };
 
-    const handleEdit = (id) => {
-        // Handle edit action
-        console.log('Editing workgroup with id:', id);
+    const handleEdit = (workgroup) => {
+        setEditData(workgroup);
+        setShowEditForm(true);
+    };
+
+    const handleEditDataChange = (e) => {
+        const { name, value } = e.target;
+        setEditData({ ...editData, [name]: value });
+    };
+
+    const handleSubmitEdit = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.put(`http://172.16.1.132:8000/workgroups/${editData.id}/`, editData);
+            setShowEditForm(false);
+            fetchData();
+        } catch (error) {
+            console.error('Error editing workgroup:', error);
+        }
+    };
+    const handleCloseEditForm = () => {
+        setShowEditForm(false);
     };
 
     const handleSubmit = async (e) => {
@@ -93,7 +113,7 @@ export default function WorkgroupsPage() {
                                     <td>{wg.wgid}</td>
                                     <td>{wg.description}</td>
                                     <td>
-                                        <button className={`${styles.button} ${styles.edit}`} onClick={() => handleEdit(wg.id)}>Edit</button><br/>
+                                        <button className={`${styles.button} ${styles.edit}`} onClick={() => handleEdit(wg)}>Edit</button><br />
                                         <button className={`${styles.button} ${styles.delete}`} onClick={() => handleDelete(wg.id)}>Delete</button>
                                     </td>
                                 </tr>
@@ -113,6 +133,20 @@ export default function WorkgroupsPage() {
                     </div>
                 </div>
             </div>
+            {showEditForm && (
+                <div className={styles['edit-form-wrapper']}>
+                    <div className={styles.card}>
+                        <button className={styles['close-button']} onClick={handleCloseEditForm}>X</button>
+                        <form className={styles.form} onSubmit={handleSubmitEdit}>
+                            <h2>Edit Workgroup</h2>
+                            <input type="text" placeholder="Name" name="name" value={editData.name} onChange={handleEditDataChange} />
+                            <input type="text" placeholder="ID" name="wgid" value={editData.wgid} onChange={handleEditDataChange} />
+                            <textarea placeholder="Description" name="description" value={editData.description} onChange={handleEditDataChange}></textarea>
+                            <button type="submit">Save</button>
+                        </form>
+                    </div>
+                </div>
+            )}
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
                     <h2>Menu</h2><br />
@@ -127,4 +161,5 @@ export default function WorkgroupsPage() {
         </>
     );
 }
+
 
