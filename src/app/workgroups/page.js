@@ -151,6 +151,9 @@ export default function WorkgroupsPage() {
                 <ul className={styles['sidebar-list']}>
                     <h2>Menu</h2><br />
                     <li className={styles['sidebar-item']}>
+                        <Link href="/dashboard" scroll={false}>Dashboard</Link>
+                    </li>
+                    <li className={styles['sidebar-item']}>
                         <Link href="/activity" scroll={false}>Activity</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
