@@ -52,6 +52,11 @@
     margin-left: 220px; 
     max-width: calc(100% - 240px); 
 }
+.edit-form-wrapper {
+    margin-top: 30px;
+    margin-left: 220px; 
+    max-width: calc(100% - 240px); 
+}
 
 .card {
     background-color: #fff;
