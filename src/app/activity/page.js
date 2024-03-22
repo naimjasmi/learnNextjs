@@ -4,8 +4,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import styles from './activity.module.css';
+import DataTable from 'react-data-table-component';
+import { useRouter } from 'next/navigation';
 
 export default function ActivityPage() {
+    const router = useRouter();
+
     const [data, setData] = useState([]);
     const [activityid, setActivityId] = useState('');
     const [date, setDate] = useState('');
@@ -18,9 +22,6 @@ export default function ActivityPage() {
     const [worktype, setWorkType] = useState([]);
     const [workgroup, setWorkGroup] = useState([]);
 
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     const fetchData = async () => {
         try {
@@ -56,26 +57,9 @@ export default function ActivityPage() {
         }
     };
 
-    const deleteActivities = async (id) => {
-        try {
-            const response = await axios.delete(`http://172.16.1.132:8000/activities/${id}/`); // delete using id
-            
-        } catch (error) {
-            console.error('Error deleting workgroup:', error);
-        }
-    };
-    const handleDelete = async (id) => {
-        if (window.confirm('Are you sure you want to delete this activity?')) {
-            try {
-                await deleteActivities(id); // Send request to delete from backend
-                setData(data.filter(activity => activity.id !== id)); // Update list data after deletion
-            } catch (error) {
-                console.error('Error deleting activity:', error);
-            }
-        }
-    };
-    
- 
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     const handleEdit = (id) => {
         // Handle edit action
@@ -102,48 +86,54 @@ export default function ActivityPage() {
         }
     };
 
+
+    const columns = [
+        {
+            name: 'Activity ID',
+            selector: row => row.activityid,
+            sortable: true,
+        },
+        {
+            name: 'Date',
+            selector: row => row.date,
+            sortable: true,
+        },
+        {
+            name: 'Weather',
+            selector: row => row.weather,
+        },
+        {
+            name: 'Description',
+            selector: row => row.description,
+            sortable: true,
+        },
+        {
+            name: 'Action',
+            cell: row => (
+                <>
+                    <button className='btn btn-sm btn-primary' onClick={() => router.push(`/activity/view/${row.id}`)}>View</button>
+                </>
+            ),
+            ignoreRowClick: true
+        },
+    ];
+
+
     return (
         <>
+            <div className={styles.container}>
             <p className={styles['page-title']}>Activity Page</p>
-            <div className={styles['table-wrapper']}>
-                <table className={styles['workgroup-table']}>
-                    <thead>
-                        <tr>
-                            <th>Activity ID</th>
-                            <th>Date</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Weather</th>
-                            <th>Latitude</th>
-                            <th>Longitude</th>
-                            <th>Description</th>
-                            <th>Work Type</th>
-                            <th>Work Group</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.length !== 0 && data.map((ac, index) => (
-                            <tr key={index} className={index % 2 === 0 ? styles.even : styles.odd}>
-                                <td>{ac.activityid}</td>
-                                <td>{ac.date}</td>
-                                <td>{ac.starttime}</td>
-                                <td>{ac.endtime}</td>
-                                <td>{ac.weather}</td>
-                                <td>{ac.latitude}</td>
-                                <td>{ac.longitude}</td>
-                                <td>{ac.description}</td>
-                                <td>{ac.worktype}</td>
-                                <td>{ac.workgroup}</td>
-                                <td>
-                                    <button className={`${styles.button} ${styles.edit}`} onClick={() => handleEdit(ac.id)}>Edit</button><br />
-                                    <button className={`${styles.button} ${styles.delete}`} onClick={() => handleDelete(ac.id)}>Delete</button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <div className={styles['table-wrapper']}>
+                    
+                    <div className='col-sm p-2'>
+                        <DataTable
+                            columns={columns}
+                            data={data}
+                        />
+                    </div>
+                </div>
             </div>
+
             <div className={styles['form-wrapper']}>
                 <div className={styles.card}>
                     <form className={styles.form} onSubmit={handleSubmit}>
@@ -162,9 +152,13 @@ export default function ActivityPage() {
                     </form>
                 </div>
             </div>
+
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
                     <h2>Menu</h2><br />
+                    <li className={styles['sidebar-item']}>
+                        <Link href="/dashboard" scroll={false}>Dashboard</Link>
+                    </li>
                     <li className={styles['sidebar-item']}>
                         <Link href="/activity" scroll={false}>Activity</Link>
                     </li>
