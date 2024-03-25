@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -11,6 +10,7 @@ export default function ActivityPage() {
     const router = useRouter();
 
     const [data, setData] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
     const [activityid, setActivityId] = useState('');
     const [date, setDate] = useState('');
     const [starttime, setStartTime] = useState('');
@@ -21,7 +21,11 @@ export default function ActivityPage() {
     const [description, setDescription] = useState('');
     const [worktype, setWorkType] = useState([]);
     const [workgroup, setWorkGroup] = useState([]);
+    const [showAddActivityForm, setShowAddActivityForm] = useState(false); // State to control visibility of add activity form
 
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     const fetchData = async () => {
         try {
@@ -57,35 +61,43 @@ export default function ActivityPage() {
         }
     };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const handleEdit = (id) => {
-        // Handle edit action
-        console.log('Editing activity with id:', id);
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             await addActivity();
             fetchData();
-            setActivityId('');
-            setDate('');
-            setStartTime('');
-            setEndTime('');
-            setWeather('');
-            setLatitude('');
-            setLongitude('');
-            setDescription('');
-            setWorkType('');
-            setWorkGroup('');
+            setShowAddActivityForm(false); // Hide the form after submission
+            resetForm();
         } catch (error) {
             console.error('Error adding activity:', error);
         }
     };
 
+    const toggleAddActivityForm = () => {
+        setShowAddActivityForm(!showAddActivityForm);
+    };
+
+    const resetForm = () => {
+        setActivityId('');
+        setDate('');
+        setStartTime('');
+        setEndTime('');
+        setWeather('');
+        setLatitude('');
+        setLongitude('');
+        setDescription('');
+        setWorkType('');
+        setWorkGroup('');
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`http://172.16.1.141:8000/activities/${id}/`);
+            fetchData(); // Refresh the data after deletion
+        } catch (error) {
+            console.error('Error deleting activity:', error);
+        }
+    };
 
     const columns = [
         {
@@ -112,47 +124,85 @@ export default function ActivityPage() {
             cell: row => (
                 <>
                     <button className='btn btn-sm btn-primary' onClick={() => router.push(`/activity/view/${row.id}`)}>View</button>
+                    <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.id)}>Delete</button>
                 </>
             ),
             ignoreRowClick: true
         },
     ];
 
+    const handleSearchChange = (e) => {
+        setSearchValue(e.target.value.toLowerCase());
+    };
+
+    const filteredData = searchValue
+        ? data.filter(item => (
+            item.activityid.toLowerCase().includes(searchValue) ||
+            item.date.toLowerCase().includes(searchValue) ||
+            item.weather.toLowerCase().includes(searchValue) ||
+            item.description.toLowerCase().includes(searchValue)
+        ))
+        : data;
 
     return (
         <>
             <div className={styles.container}>
-            <p className={styles['page-title']}>Activity Page</p>
+                <p className={styles['page-title']}>Activity Page</p>
                 <div className={styles['table-wrapper']}>
-                    
                     <div className='col-sm p-2'>
                         <DataTable
                             columns={columns}
-                            data={data}
+                            data={filteredData}
+                            subHeader
+                            subHeaderComponent={
+                                <input
+                                    type="text"
+                                    placeholder="Search..."
+                                    className={styles.search}
+                                    value={searchValue}
+                                    onChange={handleSearchChange}
+                                />
+                            }
                         />
                     </div>
                 </div>
             </div>
 
             <div className={styles['form-wrapper']}>
-                <div className={styles.card}>
-                    <form className={styles.form} onSubmit={handleSubmit}>
-                        <h2>Add New Activity</h2>
-                        <input type="text" placeholder="Activity ID" value={activityid} onChange={(e) => setActivityId(e.target.value)} />
-                        <input type="date" placeholder="Date" value={date} onChange={(e) => setDate(e.target.value)} />
-                        <input type="time" placeholder="Start Time" value={starttime} onChange={(e) => setStartTime(e.target.value)} />
-                        <input type="time" placeholder="End Time" value={endtime} onChange={(e) => setEndTime(e.target.value)} />
-                        <input type="text" placeholder="Weather" value={weather} onChange={(e) => setWeather(e.target.value)} />
-                        <input type="text" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
-                        <input type="text" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
-                        <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-                        <input type="text" placeholder="Work Type" value={worktype} onChange={(e) => setWorkType(e.target.value)} />
-                        <input type="text" placeholder="Work Group" value={workgroup} onChange={(e) => setWorkGroup(e.target.value)} />
-                        <button type="submit">Add</button>
-                    </form>
-                </div>
-            </div>
+                {!showAddActivityForm && (
+                    <button onClick={toggleAddActivityForm} className={styles.addButton}>
+                        Add New Activity
+                    </button>
+                )}
+                {showAddActivityForm && (
+                    <div className={styles.card}>
+                        <form className={styles.form} onSubmit={handleSubmit}>
+                            <h2>Add New Activity</h2>
+                            <input type="text" placeholder="Activity ID" value={activityid} onChange={(e) => setActivityId(e.target.value)} />
+                            <input type="date" placeholder="Date" value={date} onChange={(e) => setDate(e.target.value)} />
+                            <input type="time" placeholder="Start Time" value={starttime} onChange={(e) => setStartTime(e.target.value)} />
+                            <input type="time" placeholder="End Time" value={endtime} onChange={(e) => setEndTime(e.target.value)} />
+                            <select value={weather} onChange={(e) => setWeather(e.target.value)}>
+                                <option value="" disabled selected>Weather</option>
+                                <option value="Clear">Clear</option>
+                                <option value="Cloudy">Cloudy</option>
+                                <option value="Light Rain">Light Rain</option>
+                                <option value="Heavy Rain">Heavy Rain</option>
+                            </select>
+                            <input type="text" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
+                            <input type="text" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
+                            <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                            <input type="text" placeholder="Work Type" value={worktype} onChange={(e) => setWorkType(e.target.value)} />
+                            <input type="text" placeholder="Work Group" value={workgroup} onChange={(e) => setWorkGroup(e.target.value)} />
+                            <div>
+                                <button type="submit" className={`${styles.add} ${styles.addButton}`}>Add</button>
+                                <button type="button" className={`${styles.cancel} ${styles.cancelButton}`} onClick={toggleAddActivityForm}>Cancel</button>
+                            </div>
+                        </form>
+                    </div>
 
+                )}
+            </div>
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
                     <h2>Menu</h2><br />

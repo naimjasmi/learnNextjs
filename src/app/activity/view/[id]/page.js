@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './view.module.css';
 import Link from 'next/link';
+import Map from '@/app/components/Map';
 
 export default function ActivityView({ params }) {
     const [activityData, setActivityData] = useState(null);
@@ -10,7 +11,7 @@ export default function ActivityView({ params }) {
     useEffect(() => {
         const fetchActivityData = async () => {
             try {
-                const { data } = await axios.get(`http://172.16.1.132:8000/activities/${params.id}/`);
+                const { data } = await axios.get(`http://172.16.1.141:8000/activities/${params.id}/`);
                 setActivityData(data);
             } catch (error) {
                 console.error('Error fetching activity data:', error);
@@ -23,7 +24,7 @@ export default function ActivityView({ params }) {
     return (
         <>
             <div className={styles.container}>
-                <div className={styles['table-wrapper']}>
+                <div className={styles['details-container']}>
                     {activityData ? (
                         <div className={styles.card}>
                             <h2>Activity Details</h2>
@@ -35,8 +36,6 @@ export default function ActivityView({ params }) {
                             <p>End Time: {activityData.endtime}</p>
                             <p>Weather: {activityData.weather}</p>
                             <p>Description: {activityData.description}</p>
-                            <p>Latitude: {activityData.latitude}</p>
-                            <p>Longitude: {activityData.longitude}</p>
                             <p>Work Type: {activityData.worktype.map((type, index) => (
                                 <span key={index}>{type}</span>
                             ))}</p>
@@ -46,6 +45,12 @@ export default function ActivityView({ params }) {
                         </div>
                     ) : (
                         <p>Loading...</p>
+                    )}
+                </div>
+
+                <div className={styles['map-container']}>
+                    {activityData && activityData.latitude && activityData.longitude && (
+                        <Map latitude={activityData.latitude} longitude={activityData.longitude} />
                     )}
                 </div>
             </div>
