@@ -10,7 +10,7 @@ export default function ActivityView({ params }) {
     useEffect(() => {
         const fetchActivityData = async () => {
             try {
-                const { data } = await axios.get(`http://172.16.1.132:8000/activities/${params.id}/`);
+                const { data } = await axios.get(`http://172.16.1.141:8000/activities/${params.id}/`);
                 setActivityData(data);
             } catch (error) {
                 console.error('Error fetching activity data:', error);
