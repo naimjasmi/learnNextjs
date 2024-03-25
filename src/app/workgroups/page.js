@@ -1,3 +1,5 @@
+//workgroup latest
+
 
 "use client";
 
@@ -11,6 +13,7 @@ export default function WorkgroupsPage() {
     const [name, setName] = useState('');
     const [wgid, setWgid] = useState('');
     const [description, setDescription] = useState('');
+    const [showAddForm, setShowAddForm] = useState(false); // State to control visibility of add form
     const [showEditForm, setShowEditForm] = useState(false);
     const [editData, setEditData] = useState({});
 
@@ -20,7 +23,7 @@ export default function WorkgroupsPage() {
 
     const fetchData = async () => {
         try {
-            const { data: res } = await axios.get('http://172.16.1.132:8000/workgroups/');
+            const { data: res } = await axios.get('http://172.16.1.141:8000/workgroups/');
             setData(res);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -29,7 +32,7 @@ export default function WorkgroupsPage() {
 
     const addWorkgroup = async ({ name, wgid, description }) => {
         try {
-            const response = await axios.post('http://172.16.1.132:8000/workgroups/', { name, wgid, description });
+            const response = await axios.post('http://172.16.1.141:8000/workgroups/', { name, wgid, description });
             return response.data;
         } catch (error) {
             throw new Error('Failed to add workgroup: ' + error.message);
@@ -38,7 +41,7 @@ export default function WorkgroupsPage() {
 
     const deleteWorkgroup = async (id) => {
         try {
-            await axios.delete(`http://172.16.1.132:8000/workgroups/${id}/`);
+            await axios.delete(`http://172.16.1.141:8000/workgroups/${id}/`);
             setData(data.filter(workgroup => workgroup.id !== id));
         } catch (error) {
             console.error('Error deleting workgroup:', error);
@@ -68,13 +71,14 @@ export default function WorkgroupsPage() {
     const handleSubmitEdit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://172.16.1.132:8000/workgroups/${editData.id}/`, editData);
+            await axios.put(`http://172.16.1.141:8000/workgroups/${editData.id}/`, editData);
             setShowEditForm(false);
             fetchData();
         } catch (error) {
             console.error('Error editing workgroup:', error);
         }
     };
+
     const handleCloseEditForm = () => {
         setShowEditForm(false);
     };
@@ -122,16 +126,22 @@ export default function WorkgroupsPage() {
                     </table>
                 </div>
                 <div className={styles['form-wrapper']}>
-                    <div className={styles.card}>
-                        <form className={styles.form} onSubmit={handleSubmit}>
-                            <h2>Add New Workgroup</h2>
-                            <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-                            <input type="text" placeholder="ID" value={wgid} onChange={(e) => setWgid(e.target.value)} />
-                            <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-                            <button type="submit">Add</button>
-                        </form>
-                    </div>
+                    {!showAddForm ? (
+                        <button onClick={() => setShowAddForm(true)} className={styles.addButton}>Add New Workgroup</button>
+                    ) : (
+                        <div className={styles.card}>
+                            <form className={styles.form} onSubmit={handleSubmit}>
+                                <h2>Add New Workgroup</h2>
+                                <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                                <input type="text" placeholder="ID" value={wgid} onChange={(e) => setWgid(e.target.value)} />
+                                <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                                <button className={`${styles.add} ${styles.addButton}`} type="submit">Add</button>
+                                <button onClick={() => setShowAddForm(false)} className={`${styles.cancel} ${styles.cancelButton}`}>Cancel</button>
+                            </form>
+                        </div>
+                    )}
                 </div>
+
             </div>
             {showEditForm && (
                 <div className={styles['edit-form-wrapper']}>
@@ -142,7 +152,7 @@ export default function WorkgroupsPage() {
                             <input type="text" placeholder="Name" name="name" value={editData.name} onChange={handleEditDataChange} />
                             <input type="text" placeholder="ID" name="wgid" value={editData.wgid} onChange={handleEditDataChange} />
                             <textarea placeholder="Description" name="description" value={editData.description} onChange={handleEditDataChange}></textarea>
-                            <button type="submit">Save</button>
+                            <button type="submit" className={`${styles.add} ${styles.addButton}`}>Save</button>
                         </form>
                     </div>
                 </div>
@@ -164,5 +174,7 @@ export default function WorkgroupsPage() {
         </>
     );
 }
+
+
 
 
