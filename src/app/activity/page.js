@@ -25,7 +25,7 @@ export default function ActivityPage() {
 
     const fetchData = async () => {
         try {
-            const { data: res } = await axios.get('http://172.16.1.132:8000/activities/');
+            const { data: res } = await axios.get('http://172.16.1.141:8000/activities/');
             setData(res);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -38,7 +38,7 @@ export default function ActivityPage() {
             const workTypeArray = Array.isArray(worktype) ? worktype : [worktype];
             const workGroupArray = Array.isArray(workgroup) ? workgroup : [workgroup];
 
-            const response = await axios.post('http://172.16.1.132:8000/activities/', {
+            const response = await axios.post('http://172.16.1.141:8000/activities/', {
                 activityid,
                 date,
                 starttime,

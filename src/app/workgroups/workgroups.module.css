@@ -8,13 +8,13 @@
     font-weight: bold;
     margin-bottom: 20px;
     color: #333;
-    margin-left: 220px; 
-    max-width: calc(100% - 240px); 
+    margin-left: 220px;
+    max-width: calc(100% - 240px);
 }
 
 .table-wrapper {
     text-align: center;
-    margin-left: 220px; 
+    margin-left: 220px;
     margin-right: 30px;
 }
 
@@ -49,24 +49,28 @@
 
 .form-wrapper {
     margin-top: 30px;
-    margin-left: 220px; 
-    max-width: calc(100% - 240px); 
+    margin-left: 220px;
+    max-width: calc(100% - 240px);
 }
+
 .edit-form-wrapper {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black overlay */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* semi-transparent black overlay */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999; /* ensure the edit form appears above other content */
+    z-index: 999;
+    /* ensure the edit form appears above other content */
 }
 
 .card {
-    position: relative; /* Ensure relative positioning for the parent */
+    position: relative;
+    /* Ensure relative positioning for the parent */
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -77,8 +81,10 @@
 
 .close-button {
     position: absolute;
-    top: 10px; /* Adjust the top position as needed */
-    right: 10px; /* Adjust the right position as needed */
+    top: 10px;
+    /* Adjust the top position as needed */
+    right: 10px;
+    /* Adjust the right position as needed */
     background: none;
     border: none;
     cursor: pointer;
@@ -116,17 +122,11 @@
 
 .form button {
     padding: 12px;
-    background-color: #007bff;
-    color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     width: 100%;
     font-size: 16px;
-}
-
-.form button:hover {
-    background-color: #0056b3;
 }
 
 .sidebar {
@@ -161,8 +161,10 @@
 }
 
 .button {
-    width: 100px; /* Set the width as needed */
-    padding: 10px; /* Add padding to adjust the button size */
+    width: 100px;
+    /* Set the width as needed */
+    padding: 10px;
+    /* Add padding to adjust the button size */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -173,17 +175,70 @@
     background-color: #0435bc;
     color: white;
 }
+
 .edit:hover {
     background-color: #021854;
     color: white;
 }
 
 .delete {
-    background-color: rgb(187, 0, 0);
+    background-color: #f44336;
     color: white;
 }
+
 .delete:hover {
     background-color: rgb(120, 0, 0);
     color: white;
 }
 
+.addButton {
+    width: 200px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #04AA6D;
+    color: white;
+}
+
+.addButton:hover {
+    background-color: #037c50;
+    ;
+    color: white;
+}
+
+.add button {
+    padding: 12px;
+    background-color: #4c637c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+.addButton {
+    background-color: #4caf50;
+    /* Change the background color */
+    color: white;
+    /* Change the text color */
+}
+
+.addButton:hover {
+    background-color: #3d8c40;
+    /* Change the background color */
+}
+
+.cancelButton {
+    background-color: #f44336;
+    /* Change the background color */
+    color: white;
+    /* Change the text color */
+}
+
+.cancelButton:hover {
+    background-color: #d32f2f;
+    /* Change hover background color */
+}
