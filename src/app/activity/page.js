@@ -182,7 +182,13 @@ export default function ActivityPage() {
                             <input type="date" placeholder="Date" value={date} onChange={(e) => setDate(e.target.value)} />
                             <input type="time" placeholder="Start Time" value={starttime} onChange={(e) => setStartTime(e.target.value)} />
                             <input type="time" placeholder="End Time" value={endtime} onChange={(e) => setEndTime(e.target.value)} />
-                            <input type="text" placeholder="Weather" value={weather} onChange={(e) => setWeather(e.target.value)} />
+                            <select value={weather} onChange={(e) => setWeather(e.target.value)}>
+                                <option value="" disabled selected>Weather</option>
+                                <option value="Clear">Clear</option>
+                                <option value="Cloudy">Cloudy</option>
+                                <option value="Light Rain">Light Rain</option>
+                                <option value="Heavy Rain">Heavy Rain</option>
+                            </select>
                             <input type="text" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
                             <input type="text" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
                             <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
@@ -194,6 +200,7 @@ export default function ActivityPage() {
                             </div>
                         </form>
                     </div>
+
                 )}
             </div>
             <nav className={styles['sidebar']}>
