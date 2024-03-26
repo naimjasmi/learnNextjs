@@ -4,9 +4,43 @@ import axios from 'axios';
 import styles from './view.module.css';
 import Link from 'next/link';
 import Map from '@/app/components/Map';
+import Workgroup from '@/app/components/Workgroup';
+import Worktype from '@/app/components/Worktype';
 
 export default function ActivityView({ params }) {
     const [activityData, setActivityData] = useState(null);
+    const [workgroups,setWorkgroups] = useState([]);
+    const [worktype, setWorktype] = useState([]);
+
+    useEffect(() =>{
+        async function getData(){
+            try{
+                const { data: res} = await axios.get(`http://172.16.1.141:8000/workgroups/`)
+                if(res){
+                    setWorkgroups(res)
+                }
+            }
+            catch (error){
+                console.log(error)
+            }
+        }
+        getData();
+    }, [])
+    
+    useEffect(() =>{
+        async function getData(){
+            try{
+                const { data: res} = await axios.get(`http://172.16.1.141:8000/worktype/`)
+                if(res){
+                    setWorktype(res)
+                }
+            }
+            catch (error){
+                console.log(error)
+            }
+        }
+        getData();
+    }, [])
 
     useEffect(() => {
         const fetchActivityData = async () => {
@@ -36,12 +70,11 @@ export default function ActivityView({ params }) {
                             <p>End Time: {activityData.endtime}</p>
                             <p>Weather: {activityData.weather}</p>
                             <p>Description: {activityData.description}</p>
-                            <p>Work Type: {activityData.worktype.map((type, index) => (
-                                <span key={index}>{type}</span>
-                            ))}</p>
-                            <p>Work Group: {activityData.workgroup.map((group, index) => (
-                                <span key={index}>{group}</span>
-                            ))}</p>
+                            
+                            <p>Work Type: <Worktype activitywt={activityData.worktype} worktype={worktype}/>
+                            <br/></p>
+                            <p>Work Group: <Workgroup activitywg={activityData.workgroup} workgroups={workgroups}/>
+                            <br/></p>
                         </div>
                     ) : (
                         <p>Loading...</p>

@@ -1,12 +1,15 @@
 import UserCard from "./usercard"
 import Link from "next/link"
 import styles from './usercard.module.css';
-export default function DashboardPage(){
-    return(
+export default function DashboardPage() {
+    return (
         <div>
-            <p className={styles['page-title']}>Dashboard Page</p>
-            <p className={styles['page-subtitle']}>this is dashboard</p>
-            <UserCard/>
+            <div className={styles.container}>
+                <p className={styles['page-title']}>Dashboard Page</p>
+                <p className={styles['page-subtitle']}>this is dashboard</p>
+                <UserCard />
+            </div>
+
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
                     <h2>Menu</h2><br />
@@ -23,6 +26,6 @@ export default function DashboardPage(){
             </nav>
 
         </div>
-        
+
     )
 }
