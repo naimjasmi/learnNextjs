@@ -1,5 +1,7 @@
 .container {
-    margin-left: 200px; /* Adjust margin as needed */
+    margin-left: 200px ; /* Adjust margin as needed */
+    margin-top: 50px;
+    margin-right: 50px;
     margin-top: 20px;
     padding: 20px;
     display: flex; /* Make the container a flex container */
@@ -142,29 +144,6 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-}
-
-.edit {
-    background-color: #0435bc;
-    color: white;
-}
-.edit:hover {
-    background-color: #021854;
-    color: white;
-}
-
-.delete {
-    background-color: rgb(187, 0, 0);
-    color: white;
-}
-.delete:hover {
-    background-color: rgb(120, 0, 0);
-    color: white;
-}
-
-.details-container {
-    flex: 1; /* Take up remaining space */
-    margin-right: 20px; /* Adjust as needed */
 }
 
 .map-container {
