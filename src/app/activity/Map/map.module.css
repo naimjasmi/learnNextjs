@@ -1,0 +1,172 @@
+.container {
+    margin-left: 200px; /* Adjust margin as needed */
+    margin-top: 20px;
+    padding: 20px;
+    display: flex; /* Make the container a flex container */
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    max-width: calc(100% - 240px); 
+}
+
+.table-wrapper {
+    text-align: center;
+    margin-right: 30px;
+}
+
+.workgroup-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 0 auto;
+}
+
+.workgroup-table th,
+.workgroup-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    color: #333;
+}
+
+.workgroup-table th {
+    background-color: #f2f2f2;
+}
+
+.even {
+    background-color: #f9f9f9;
+}
+
+.odd {
+    background-color: #e9e9e9;
+}
+
+.form-wrapper {
+    margin-top: 30px;
+    max-width: calc(100% - 240px); 
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form input,
+.form textarea {
+    margin-bottom: 20px;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 16px;
+}
+
+.form textarea {
+    resize: vertical;
+}
+
+.form button {
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+.form button:hover {
+    background-color: #0056b3;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    
+}
+
+.sidebar-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-item {
+    margin-bottom: 10px;
+}
+
+.sidebar-item a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.sidebar-item a:hover {
+    color: #007bff;
+}
+
+.button {
+    width: 100px; /* Set the width as needed */
+    padding: 10px; /* Add padding to adjust the button size */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.edit {
+    background-color: #0435bc;
+    color: white;
+}
+.edit:hover {
+    background-color: #021854;
+    color: white;
+}
+
+.delete {
+    background-color: rgb(187, 0, 0);
+    color: white;
+}
+.delete:hover {
+    background-color: rgb(120, 0, 0);
+    color: white;
+}
+
+.details-container {
+    flex: 1; /* Take up remaining space */
+    margin-right: 20px; /* Adjust as needed */
+}
+
+.map-container {
+    flex: 1; /* Take up remaining space */
+}
