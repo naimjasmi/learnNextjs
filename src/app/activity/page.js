@@ -174,6 +174,9 @@ export default function ActivityPage() {
                         Add New Activity
                     </button>
                 )}
+                <button onClick={() => router.push(`/activity/Map`)} className={styles.addButton}>
+                        Maps
+                    </button>
                 {showAddActivityForm && (
                     <div className={styles.card}>
                         <form className={styles.form} onSubmit={handleSubmit}>
