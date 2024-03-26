@@ -184,10 +184,10 @@ export default function ActivityPage() {
                             <input type="time" placeholder="End Time" value={endtime} onChange={(e) => setEndTime(e.target.value)} />
                             <select value={weather} onChange={(e) => setWeather(e.target.value)}>
                                 <option value="" disabled selected>Weather</option>
-                                <option value="Clear">Clear</option>
-                                <option value="Cloudy">Cloudy</option>
-                                <option value="Light Rain">Light Rain</option>
-                                <option value="Heavy Rain">Heavy Rain</option>
+                                <option value="clear">Clear</option>
+                                <option value="cloudy">Cloudy</option>
+                                <option value="lightrain">Light Rain</option>
+                                <option value="heavyrain">Heavy Rain</option>
                             </select>
                             <input type="text" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
                             <input type="text" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)} />

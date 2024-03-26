@@ -1,15 +1,38 @@
+/* usercard.module.css */
+
 .usercard {
-    border: 1px solid #000;
-    border-radius: 10px;
-    padding: 10px;
-    margin-left: 220px; 
-    max-width: calc(100% - 240px); 
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
 }
+
+.usercard h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.usercard p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.usercard .contact {
+    color: #007bff;
+    font-weight: bold;
+}
+
+
+/* Global Styles */
 
 .container {
     margin: 0 auto;
     padding: 20px;
-    max-width: 800px;
+    margin-left: 220px;
 }
 
 .page-title {
@@ -17,24 +40,20 @@
     font-weight: bold;
     margin-bottom: 20px;
     color: #333;
-    margin-left: 220px; 
-    max-width: calc(100% - 240px); 
 }
+
 .page-subtitle {
     font-size: 18px;
     margin-bottom: 20px;
     color: #333;
-    margin-left: 220px; 
-    max-width: calc(100% - 240px); 
 }
 
 .table-wrapper {
     text-align: center;
-    margin-left: 220px; /* Adjusted to accommodate the sidebar width */
 }
 
 .workgroup-table {
-    width: calc(100% - 220px); /* Adjusted width to fit the remaining space after considering the sidebar */
+    width: 100%;
     border-collapse: collapse;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -64,8 +83,8 @@
 
 .form-wrapper {
     margin-top: 30px;
-    margin-left: 220px; 
-    max-width: calc(100% - 240px); 
+    max-width: calc(100% - 240px);
+    margin-left: 220px;
 }
 
 .card {
@@ -149,4 +168,3 @@
 .sidebar-item a:hover {
     color: #007bff;
 }
-
