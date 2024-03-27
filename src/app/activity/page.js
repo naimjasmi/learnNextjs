@@ -153,6 +153,9 @@ export default function ActivityPage() {
                         <DataTable
                             columns={columns}
                             data={filteredData}
+                            pagination
+                            paginationPerPageOptions={[5, 10, 20, 50]}
+                            paginationRowsPerPageOptions={[5, 10, 20, 50]}
                             subHeader
                             subHeaderComponent={
                                 <input
@@ -169,14 +172,17 @@ export default function ActivityPage() {
             </div>
 
             <div className={styles['form-wrapper']}>
+
+                <button style={{ marginRight: '10px' }} onClick={() => router.push(`/activity/Map`)} className={styles.addButton}>
+                    Maps
+                </button>
+
                 {!showAddActivityForm && (
                     <button onClick={toggleAddActivityForm} className={styles.addButton}>
                         Add New Activity
                     </button>
                 )}
-                <button onClick={() => router.push(`/activity/Map`)} className={styles.addButton}>
-                        Maps
-                    </button>
+
                 {showAddActivityForm && (
                     <div className={styles.card}>
                         <form className={styles.form} onSubmit={handleSubmit}>
@@ -195,7 +201,16 @@ export default function ActivityPage() {
                             <input type="text" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
                             <input type="text" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
                             <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-                            <input type="text" placeholder="Work Type" value={worktype} onChange={(e) => setWorkType(e.target.value)} />
+                            <select value={worktype} onChange={(e) => setWorkType(Array.from(e.target.selectedOptions, option => option.value))}>
+                                <option value="" disabled selected>Work Type</option>
+                                <option value="33316552-79b4-4172-b8ee-2828cfe9b272">WT001 : Open Trench</option>
+                                <option value="7de27d79-c6ea-4e5b-8005-92e0c0df3aa8">WT002 : Cable Pulling/Splicing</option>
+                                <option value="56c16e68-f697-4cae-ae16-5dbbaa0a9aa0">WT003 : Sub-duct Installation</option>
+                                <option value="3a46a618-ba51-4be0-8b60-9eed35b20882">WT004 : HDD - Duct Pulling</option>
+                                <option value="a95703d9-d3bf-4dac-b18f-4da1524b41ca">WT005 : HDD - Reaming</option>
+                                <option value="38e1587e-f67d-4616-82ac-4d6bf640afdd">WT006 : HDD - Piloting</option>
+                                <option value="d76d7d11-7b68-4d34-b18c-2b7dff10f195">WT007 : Cable Signal Testing</option>
+                            </select>
                             <input type="text" placeholder="Work Group" value={workgroup} onChange={(e) => setWorkGroup(e.target.value)} />
                             <div>
                                 <button type="submit" className={`${styles.add} ${styles.addButton}`}>Add</button>

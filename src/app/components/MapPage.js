@@ -23,7 +23,7 @@ const MapPage = () => {
                 position: [parseFloat(activity.latitude), parseFloat(activity.longitude)],
                 description: activity.description,
                 activityId: activity.activityid,
-                key: activity.id // assuming id is unique
+                key: activity.id // id is unique
             }));
             setMarkers(newMarkers);
         } catch (error) {
