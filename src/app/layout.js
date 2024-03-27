@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 //import "./globals.css";
-import Footer from "c:/Users/Asus/Desktop/WORK/msanext/src/app/components/footer"
+import Footer from "@/app/components/footer"
 import 'bootstrap/dist/css/bootstrap.css';
 //import BootstrapClient from "."
 
