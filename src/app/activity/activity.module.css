@@ -18,35 +18,6 @@
     margin-right: 30px;
 }
 
-.workgroup-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow-x: auto;
-    margin: 0 auto;
-}
-
-.workgroup-table th,
-.workgroup-table td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-    color: #333;
-}
-
-.workgroup-table th {
-    background-color: #f2f2f2;
-}
-
-.even {
-    background-color: #f9f9f9;
-}
-
-.odd {
-    background-color: #e9e9e9;
-}
-
 .form-wrapper {
     margin-top: 30px;
     margin-left: 220px;
@@ -82,9 +53,7 @@
 .close-button {
     position: absolute;
     top: 10px;
-    /* Adjust the top position as needed */
     right: 10px;
-    /* Adjust the right position as needed */
     background: none;
     border: none;
     cursor: pointer;
@@ -263,3 +232,20 @@
 .form select:focus {
     border-color: #007bff; /* Change border color on hover/focus */
 }
+.avatar {
+    margin-bottom: 20px;
+}
+
+.avatarImage {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.logoImage {
+    width: auto;
+    height: 70px;
+    border-radius: 20%;
+}
+
+
+

@@ -1,12 +1,12 @@
-//workgroup latest
-
-
 "use client";
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import styles from './workgroups.module.css';
+import Image from 'next/image';
+
+//import Card4 from '../dashboard/card4';
 
 export default function WorkgroupsPage() {
     const [data, setData] = useState([]);
@@ -16,6 +16,7 @@ export default function WorkgroupsPage() {
     const [showAddForm, setShowAddForm] = useState(false); // State to control visibility of add form
     const [showEditForm, setShowEditForm] = useState(false);
     const [editData, setEditData] = useState({});
+    const [notification, setNotification] = useState('');
 
     useEffect(() => {
         fetchData();
@@ -23,7 +24,7 @@ export default function WorkgroupsPage() {
 
     const fetchData = async () => {
         try {
-            const { data: res } = await axios.get('http://172.16.1.141:8000/workgroups/');
+            const { data: res } = await axios.get('http://172.16.1.166:8000/workgroups/');
             setData(res);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -32,7 +33,8 @@ export default function WorkgroupsPage() {
 
     const addWorkgroup = async ({ name, wgid, description }) => {
         try {
-            const response = await axios.post('http://172.16.1.141:8000/workgroups/', { name, wgid, description });
+            const response = await axios.post('http://172.16.1.166:8000/workgroups/', { name, wgid, description });
+            setNotification('New workgroup has been added');
             return response.data;
         } catch (error) {
             throw new Error('Failed to add workgroup: ' + error.message);
@@ -41,7 +43,7 @@ export default function WorkgroupsPage() {
 
     const deleteWorkgroup = async (id) => {
         try {
-            await axios.delete(`http://172.16.1.141:8000/workgroups/${id}/`);
+            await axios.delete(`http://172.16.1.166:8000/workgroups/${id}/`);
             setData(data.filter(workgroup => workgroup.id !== id));
         } catch (error) {
             console.error('Error deleting workgroup:', error);
@@ -71,7 +73,7 @@ export default function WorkgroupsPage() {
     const handleSubmitEdit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://172.16.1.141:8000/workgroups/${editData.id}/`, editData);
+            await axios.put(`http://172.16.1.166:8000/workgroups/${editData.id}/`, editData);
             setShowEditForm(false);
             fetchData();
         } catch (error) {
@@ -140,7 +142,12 @@ export default function WorkgroupsPage() {
                             </form>
                         </div>
                     )}
+                    
+                {/* Pass notification state to UserCard component */}
+                {/* <Card4 notification={notification} /> */}
                 </div>
+
+
 
             </div>
             {showEditForm && (
@@ -159,7 +166,13 @@ export default function WorkgroupsPage() {
             )}
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
-                    <h2>Menu</h2><br />
+                    <div className={styles.avatar}>
+                        <Image src="/msalogo.png"
+                            alt="User Avatar"
+                            width={600}
+                            height={600}
+                            className={styles.logoImage} />
+                    </div>
                     <li className={styles['sidebar-item']}>
                         <Link href="/dashboard" scroll={false}>Dashboard</Link>
                     </li>
@@ -171,6 +184,7 @@ export default function WorkgroupsPage() {
                     </li>
                 </ul>
             </nav>
+
         </>
     );
 }

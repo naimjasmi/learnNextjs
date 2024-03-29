@@ -4,6 +4,7 @@ import axios from 'axios';
 import styles from './map.module.css';
 import Link from 'next/link';
 import MapPage from '@/app/components/MapPage';
+import Image from 'next/image';
 
 export default function WorkMap() {
 
@@ -18,7 +19,13 @@ export default function WorkMap() {
 
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
-                    <h2>Menu</h2><br />
+                    <div className={styles.avatar}>
+                        <Image src="/msalogo.png"
+                            alt="User Avatar"
+                            width={600}
+                            height={600}
+                            className={styles.logoImage} />
+                    </div>
                     <li className={styles['sidebar-item']}>
                         <Link href="/dashboard" scroll={false}>Dashboard</Link>
                     </li>
