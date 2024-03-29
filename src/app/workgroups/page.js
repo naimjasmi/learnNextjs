@@ -5,6 +5,9 @@ import axios from 'axios';
 import Link from 'next/link';
 import styles from './workgroups.module.css';
 import Image from 'next/image';
+import { Toast } from 'react-bootstrap';
+//thhv
+
 
 //import Card4 from '../dashboard/card4';
 
@@ -16,7 +19,28 @@ export default function WorkgroupsPage() {
     const [showAddForm, setShowAddForm] = useState(false); // State to control visibility of add form
     const [showEditForm, setShowEditForm] = useState(false);
     const [editData, setEditData] = useState({});
-    const [notification, setNotification] = useState('');
+    //const [notification, setNotification] = useState('');
+    const [showToast, setShowToast] = useState(false);
+    const toggleToast = () => setShowToast(!showToast);
+    const [showEditToast, setShowEditToast] = useState(false);
+    const [showDeleteToast, setShowDeleteToast] = useState(false);
+    const toggleEditToast = () => setShowEditToast(!showEditToast);
+    const toggleDeleteToast = () => setShowDeleteToast(!showDeleteToast);
+
+    const showAddWorkgroupToast = () => {
+        toggleToast(); // Show the toast
+        setTimeout(() => toggleToast(), 3000); // Hide the toast after 3 seconds
+    };
+
+    const showEditWorkgroupToast = () => {
+        toggleEditToast();
+        setTimeout(() => toggleEditToast(), 3000);
+    };
+
+    const showDeleteWorkgroupToast = () => {
+        toggleDeleteToast();
+        setTimeout(() => toggleDeleteToast(), 3000);
+    };
 
     useEffect(() => {
         fetchData();
@@ -34,7 +58,7 @@ export default function WorkgroupsPage() {
     const addWorkgroup = async ({ name, wgid, description }) => {
         try {
             const response = await axios.post('http://172.16.1.166:8000/workgroups/', { name, wgid, description });
-            setNotification('New workgroup has been added');
+            //setNotification('New workgroup has been added');
             return response.data;
         } catch (error) {
             throw new Error('Failed to add workgroup: ' + error.message);
@@ -54,6 +78,7 @@ export default function WorkgroupsPage() {
         if (window.confirm('Are you sure you want to delete this workgroup?')) {
             try {
                 await deleteWorkgroup(id);
+                showDeleteWorkgroupToast();
             } catch (error) {
                 console.error('Error deleting workgroup:', error);
             }
@@ -76,6 +101,7 @@ export default function WorkgroupsPage() {
             await axios.put(`http://172.16.1.166:8000/workgroups/${editData.id}/`, editData);
             setShowEditForm(false);
             fetchData();
+            showEditWorkgroupToast();
         } catch (error) {
             console.error('Error editing workgroup:', error);
         }
@@ -93,6 +119,7 @@ export default function WorkgroupsPage() {
             setName('');
             setWgid('');
             setDescription('');
+            showAddWorkgroupToast(); // Show toast when workgroup is added
         } catch (error) {
             console.error('Error adding workgroup:', error);
         }
@@ -142,9 +169,10 @@ export default function WorkgroupsPage() {
                             </form>
                         </div>
                     )}
-                    
-                {/* Pass notification state to UserCard component */}
-                {/* <Card4 notification={notification} /> */}
+
+                    {/* Pass notification state to UserCard component */}
+                    {/* <Card4 notification={notification} /> */}
+
                 </div>
 
 
@@ -184,6 +212,29 @@ export default function WorkgroupsPage() {
                     </li>
                 </ul>
             </nav>
+
+            <Toast show={showToast} onClose={toggleToast} style={{ position: 'fixed', top: '1rem', right: '1rem', zIndex: 9999 }}>
+                <Toast.Header>
+                    <strong className="me-auto">Success</strong>
+                </Toast.Header>
+                <Toast.Body>New workgroup has been added</Toast.Body>
+            </Toast>
+            <Toast show={showEditToast} onClose={toggleEditToast} style={{ position: 'fixed', top: '1rem', right: '1rem', zIndex: 9999 }}>
+                <Toast.Header>
+                    <strong className="me-auto">Success</strong>
+                </Toast.Header>
+                <Toast.Body>Workgroup has been edited</Toast.Body>
+            </Toast>
+
+            <Toast show={showDeleteToast} onClose={toggleDeleteToast} style={{ position: 'fixed', top: '1rem', right: '1rem', zIndex: 9999 }}>
+                <Toast.Header>
+                    <strong className="me-auto">Success</strong>
+                </Toast.Header>
+                <Toast.Body>Workgroup has been deleted</Toast.Body>
+            </Toast>
+        
+
+
 
         </>
     );

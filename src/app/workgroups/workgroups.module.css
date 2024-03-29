@@ -256,3 +256,9 @@
     height: 70px;
     border-radius: 20%;
 }
+.toast-top-right {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 9999;
+}
