@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Map from '@/app/components/Map';
 import Workgroup from '@/app/components/Workgroup';
 import Worktype from '@/app/components/Worktype';
+import Image from 'next/image';
 
 export default function ActivityView({ params }) {
     const [activityData, setActivityData] = useState(null);
@@ -15,7 +16,7 @@ export default function ActivityView({ params }) {
     useEffect(() =>{
         async function getData(){
             try{
-                const { data: res} = await axios.get(`http://172.16.1.141:8000/workgroups/`)
+                const { data: res} = await axios.get(`http://172.16.1.166:8000/workgroups/`)
                 if(res){
                     setWorkgroups(res)
                 }
@@ -30,7 +31,7 @@ export default function ActivityView({ params }) {
     useEffect(() =>{
         async function getData(){
             try{
-                const { data: res} = await axios.get(`http://172.16.1.141:8000/worktype/`)
+                const { data: res} = await axios.get(`http://172.16.1.166:8000/worktype/`)
                 if(res){
                     setWorktype(res)
                 }
@@ -45,7 +46,7 @@ export default function ActivityView({ params }) {
     useEffect(() => {
         const fetchActivityData = async () => {
             try {
-                const { data } = await axios.get(`http://172.16.1.141:8000/activities/${params.id}/`);
+                const { data } = await axios.get(`http://172.16.1.166:8000/activities/${params.id}/`);
                 setActivityData(data);
             } catch (error) {
                 console.error('Error fetching activity data:', error);
@@ -90,7 +91,13 @@ export default function ActivityView({ params }) {
 
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
-                    <h2>Menu</h2><br />
+                    <div className={styles.avatar}>
+                        <Image src="/msalogo.png"
+                            alt="User Avatar"
+                            width={600}
+                            height={600}
+                            className={styles.logoImage} />
+                    </div>
                     <li className={styles['sidebar-item']}>
                         <Link href="/dashboard" scroll={false}>Dashboard</Link>
                     </li>

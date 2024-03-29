@@ -5,6 +5,7 @@ import Link from 'next/link';
 import styles from './activity.module.css';
 import DataTable from 'react-data-table-component';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function ActivityPage() {
     const router = useRouter();
@@ -29,7 +30,7 @@ export default function ActivityPage() {
 
     const fetchData = async () => {
         try {
-            const { data: res } = await axios.get('http://172.16.1.141:8000/activities/');
+            const { data: res } = await axios.get('http://172.16.1.166:8000/activities/');
             setData(res);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -42,7 +43,7 @@ export default function ActivityPage() {
             const workTypeArray = Array.isArray(worktype) ? worktype : [worktype];
             const workGroupArray = Array.isArray(workgroup) ? workgroup : [workgroup];
 
-            const response = await axios.post('http://172.16.1.141:8000/activities/', {
+            const response = await axios.post('http://172.16.1.166:8000/activities/', {
                 activityid,
                 date,
                 starttime,
@@ -92,7 +93,7 @@ export default function ActivityPage() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://172.16.1.141:8000/activities/${id}/`);
+            await axios.delete(`http://172.16.1.166:8000/activities/${id}/`);
             fetchData(); // Refresh the data after deletion
         } catch (error) {
             console.error('Error deleting activity:', error);
@@ -223,7 +224,13 @@ export default function ActivityPage() {
             </div>
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
-                    <h2>Menu</h2><br />
+                    <div className={styles.avatar}>
+                        <Image src="/msalogo.png"
+                            alt="User Avatar"
+                            width={600}
+                            height={600}
+                            className={styles.logoImage} />
+                    </div>
                     <li className={styles['sidebar-item']}>
                         <Link href="/dashboard" scroll={false}>Dashboard</Link>
                     </li>

@@ -1,16 +1,9 @@
-import styles from "./usercard.module.css";
+import styles from "./card1.module.css";
 import Image from 'next/image';
 
-export default function UserCard() {
+export default function Card1() {
     return (
         <div className={styles.usercard}>
-            <div className={styles.avatar}>
-                <Image src="/guypic.png"
-                    alt="User Avatar"
-                    width={600}
-                    height={600}
-                    className={styles.avatarImage} />
-            </div>
             <div className={styles.userInfo}>
                 <h1>Mohamad Naim</h1>
                 <p>Role: Frontend Developer</p>

@@ -149,3 +149,17 @@
 .map-container {
     flex: 1; /* Take up remaining space */
 }
+.avatar {
+    margin-bottom: 20px;
+}
+
+.avatarImage {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.logoImage {
+    width: auto;
+    height: 70px;
+    border-radius: 20%;
+}
