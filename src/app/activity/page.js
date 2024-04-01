@@ -6,6 +6,7 @@ import styles from './activity.module.css';
 import DataTable from 'react-data-table-component';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { FaUsers, FaClipboardList, FaTh } from "react-icons/fa";
 
 export default function ActivityPage() {
     const router = useRouter();
@@ -232,13 +233,13 @@ export default function ActivityPage() {
                             className={styles.logoImage} />
                     </div>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/dashboard" scroll={false}>Dashboard</Link>
+                        <Link href="/dashboard" scroll={false}><FaTh/> Dashboard</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/activity" scroll={false}>Activity</Link>
+                        <Link href="/activity" scroll={false}><FaClipboardList/> Activity</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/workgroups" scroll={false}>Workgroup</Link>
+                        <Link href="/workgroups" scroll={false}><FaUsers/> Workgroup</Link>
                     </li>
                 </ul>
             </nav>

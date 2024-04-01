@@ -6,10 +6,8 @@ import Link from 'next/link';
 import styles from './workgroups.module.css';
 import Image from 'next/image';
 import { Toast } from 'react-bootstrap';
-//thhv
+import { FaUsers, FaClipboardList, FaTh } from "react-icons/fa";
 
-
-//import Card4 from '../dashboard/card4';
 
 export default function WorkgroupsPage() {
     const [data, setData] = useState([]);
@@ -202,13 +200,13 @@ export default function WorkgroupsPage() {
                             className={styles.logoImage} />
                     </div>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/dashboard" scroll={false}>Dashboard</Link>
+                        <Link href="/dashboard" scroll={false}><FaTh/> Dashboard</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/activity" scroll={false}>Activity</Link>
+                        <Link href="/activity" scroll={false}><FaClipboardList/> Activity</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/workgroups" scroll={false}>Workgroup</Link>
+                        <Link href="/workgroups" scroll={false}><FaUsers/> Workgroup</Link>
                     </li>
                 </ul>
             </nav>

@@ -5,6 +5,7 @@ import styles from './map.module.css';
 import Link from 'next/link';
 import MapPage from '@/app/components/MapPage';
 import Image from 'next/image';
+import { FaUsers, FaClipboardList, FaTh } from "react-icons/fa";
 
 export default function WorkMap() {
 
@@ -27,13 +28,13 @@ export default function WorkMap() {
                             className={styles.logoImage} />
                     </div>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/dashboard" scroll={false}>Dashboard</Link>
+                        <Link href="/dashboard" scroll={false}><FaTh/> Dashboard</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/activity" scroll={false}>Activity</Link>
+                        <Link href="/activity" scroll={false}><FaClipboardList/> Activity</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/workgroups" scroll={false}>Workgroup</Link>
+                        <Link href="/workgroups" scroll={false}><FaUsers/> Workgroup</Link>
                     </li>
                 </ul>
             </nav>

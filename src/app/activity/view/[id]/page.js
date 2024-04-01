@@ -7,6 +7,7 @@ import Map from '@/app/components/Map';
 import Workgroup from '@/app/components/Workgroup';
 import Worktype from '@/app/components/Worktype';
 import Image from 'next/image';
+import { FaUsers, FaClipboardList, FaTh } from "react-icons/fa";
 
 export default function ActivityView({ params }) {
     const [activityData, setActivityData] = useState(null);
@@ -99,13 +100,13 @@ export default function ActivityView({ params }) {
                             className={styles.logoImage} />
                     </div>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/dashboard" scroll={false}>Dashboard</Link>
+                        <Link href="/dashboard" scroll={false}><FaTh/> Dashboard</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/activity" scroll={false}>Activity</Link>
+                        <Link href="/activity" scroll={false}><FaClipboardList/> Activity</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/workgroups" scroll={false}>Workgroup</Link>
+                        <Link href="/workgroups" scroll={false}><FaUsers/> Workgroup</Link>
                     </li>
                 </ul>
             </nav>
