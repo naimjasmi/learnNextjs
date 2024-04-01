@@ -5,9 +5,9 @@ import axios from 'axios';
 import Link from 'next/link';
 import styles from './workgroups.module.css';
 import Image from 'next/image';
-import { Toast } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { FaUsers, FaClipboardList, FaTh } from "react-icons/fa";
-
 
 export default function WorkgroupsPage() {
     const [data, setData] = useState([]);
@@ -17,28 +17,6 @@ export default function WorkgroupsPage() {
     const [showAddForm, setShowAddForm] = useState(false); // State to control visibility of add form
     const [showEditForm, setShowEditForm] = useState(false);
     const [editData, setEditData] = useState({});
-    //const [notification, setNotification] = useState('');
-    const [showToast, setShowToast] = useState(false);
-    const toggleToast = () => setShowToast(!showToast);
-    const [showEditToast, setShowEditToast] = useState(false);
-    const [showDeleteToast, setShowDeleteToast] = useState(false);
-    const toggleEditToast = () => setShowEditToast(!showEditToast);
-    const toggleDeleteToast = () => setShowDeleteToast(!showDeleteToast);
-
-    const showAddWorkgroupToast = () => {
-        toggleToast(); // Show the toast
-        setTimeout(() => toggleToast(), 3000); // Hide the toast after 3 seconds
-    };
-
-    const showEditWorkgroupToast = () => {
-        toggleEditToast();
-        setTimeout(() => toggleEditToast(), 3000);
-    };
-
-    const showDeleteWorkgroupToast = () => {
-        toggleDeleteToast();
-        setTimeout(() => toggleDeleteToast(), 3000);
-    };
 
     useEffect(() => {
         fetchData();
@@ -56,7 +34,6 @@ export default function WorkgroupsPage() {
     const addWorkgroup = async ({ name, wgid, description }) => {
         try {
             const response = await axios.post('http://172.16.1.166:8000/workgroups/', { name, wgid, description });
-            //setNotification('New workgroup has been added');
             return response.data;
         } catch (error) {
             throw new Error('Failed to add workgroup: ' + error.message);
@@ -76,7 +53,7 @@ export default function WorkgroupsPage() {
         if (window.confirm('Are you sure you want to delete this workgroup?')) {
             try {
                 await deleteWorkgroup(id);
-                showDeleteWorkgroupToast();
+                toast.success('Workgroup has been deleted', { autoClose: 3000 });
             } catch (error) {
                 console.error('Error deleting workgroup:', error);
             }
@@ -99,14 +76,10 @@ export default function WorkgroupsPage() {
             await axios.put(`http://172.16.1.166:8000/workgroups/${editData.id}/`, editData);
             setShowEditForm(false);
             fetchData();
-            showEditWorkgroupToast();
+            toast.success('Workgroup has been edited', { autoClose: 3000 });
         } catch (error) {
             console.error('Error editing workgroup:', error);
         }
-    };
-
-    const handleCloseEditForm = () => {
-        setShowEditForm(false);
     };
 
     const handleSubmit = async (e) => {
@@ -117,7 +90,7 @@ export default function WorkgroupsPage() {
             setName('');
             setWgid('');
             setDescription('');
-            showAddWorkgroupToast(); // Show toast when workgroup is added
+            toast.success('New workgroup has been added', { autoClose: 3000 });
         } catch (error) {
             console.error('Error adding workgroup:', error);
         }
@@ -167,19 +140,13 @@ export default function WorkgroupsPage() {
                             </form>
                         </div>
                     )}
-
-                    {/* Pass notification state to UserCard component */}
-                    {/* <Card4 notification={notification} /> */}
-
                 </div>
-
-
-
             </div>
+
             {showEditForm && (
                 <div className={styles['edit-form-wrapper']}>
                     <div className={styles.card}>
-                        <button className={styles['close-button']} onClick={handleCloseEditForm}>X</button>
+                        <button className={styles['close-button']} onClick={() => setShowEditForm(false)}>X</button>
                         <form className={styles.form} onSubmit={handleSubmitEdit}>
                             <h2>Edit Workgroup</h2>
                             <input type="text" placeholder="Name" name="name" value={editData.name} onChange={handleEditDataChange} />
@@ -190,6 +157,7 @@ export default function WorkgroupsPage() {
                     </div>
                 </div>
             )}
+
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
                     <div className={styles.avatar}>
@@ -211,33 +179,7 @@ export default function WorkgroupsPage() {
                 </ul>
             </nav>
 
-            <Toast show={showToast} onClose={toggleToast} style={{ position: 'fixed', top: '1rem', right: '1rem', zIndex: 9999 }}>
-                <Toast.Header>
-                    <strong className="me-auto">Success</strong>
-                </Toast.Header>
-                <Toast.Body>New workgroup has been added</Toast.Body>
-            </Toast>
-            <Toast show={showEditToast} onClose={toggleEditToast} style={{ position: 'fixed', top: '1rem', right: '1rem', zIndex: 9999 }}>
-                <Toast.Header>
-                    <strong className="me-auto">Success</strong>
-                </Toast.Header>
-                <Toast.Body>Workgroup has been edited</Toast.Body>
-            </Toast>
-
-            <Toast show={showDeleteToast} onClose={toggleDeleteToast} style={{ position: 'fixed', top: '1rem', right: '1rem', zIndex: 9999 }}>
-                <Toast.Header>
-                    <strong className="me-auto">Success</strong>
-                </Toast.Header>
-                <Toast.Body>Workgroup has been deleted</Toast.Body>
-            </Toast>
-        
-
-
-
+            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
         </>
     );
 }
-
-
-
-
