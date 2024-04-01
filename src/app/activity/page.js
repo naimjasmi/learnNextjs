@@ -7,6 +7,8 @@ import DataTable from 'react-data-table-component';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { FaUsers, FaClipboardList, FaTh } from "react-icons/fa";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ActivityPage() {
     const router = useRouter();
@@ -56,6 +58,7 @@ export default function ActivityPage() {
                 worktype: workTypeArray,
                 workgroup: workGroupArray
             });
+            toast.success('New activity has been added', { autoClose: 3000 });
             return response.data;
         } catch (error) {
             console.error('Error adding activity:', error);
@@ -96,6 +99,7 @@ export default function ActivityPage() {
         try {
             await axios.delete(`http://172.16.1.166:8000/activities/${id}/`);
             fetchData(); // Refresh the data after deletion
+            toast.success('Activity has been deleted', { autoClose: 3000 });
         } catch (error) {
             console.error('Error deleting activity:', error);
         }
@@ -243,6 +247,8 @@ export default function ActivityPage() {
                     </li>
                 </ul>
             </nav>
+
+            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
         </>
     );
 }
