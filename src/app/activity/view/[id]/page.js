@@ -11,33 +11,33 @@ import { FaUsers, FaClipboardList, FaTh } from "react-icons/fa";
 
 export default function ActivityView({ params }) {
     const [activityData, setActivityData] = useState(null);
-    const [workgroups,setWorkgroups] = useState([]);
+    const [workgroups, setWorkgroups] = useState([]);
     const [worktype, setWorktype] = useState([]);
 
-    useEffect(() =>{
-        async function getData(){
-            try{
-                const { data: res} = await axios.get(`http://172.16.1.166:8000/workgroups/`)
-                if(res){
+    useEffect(() => {
+        async function getData() {
+            try {
+                const { data: res } = await axios.get(`http://172.16.1.166:8000/workgroups/`)
+                if (res) {
                     setWorkgroups(res)
                 }
             }
-            catch (error){
+            catch (error) {
                 console.log(error)
             }
         }
         getData();
     }, [])
-    
-    useEffect(() =>{
-        async function getData(){
-            try{
-                const { data: res} = await axios.get(`http://172.16.1.166:8000/worktype/`)
-                if(res){
+
+    useEffect(() => {
+        async function getData() {
+            try {
+                const { data: res } = await axios.get(`http://172.16.1.166:8000/worktype/`)
+                if (res) {
                     setWorktype(res)
                 }
             }
-            catch (error){
+            catch (error) {
                 console.log(error)
             }
         }
@@ -72,11 +72,11 @@ export default function ActivityView({ params }) {
                             <p>End Time: {activityData.endtime}</p>
                             <p>Weather: {activityData.weather}</p>
                             <p>Description: {activityData.description}</p>
-                            
-                            <p>Work Type: <Worktype activitywt={activityData.worktype} worktype={worktype}/>
-                            <br/></p>
-                            <p>Work Group: <Workgroup activitywg={activityData.workgroup} workgroups={workgroups}/>
-                            <br/></p>
+
+                            <p>Work Type: <Worktype activitywt={activityData.worktype} worktype={worktype} />
+                                <br /></p>
+                            <p>Work Group: <Workgroup activitywg={activityData.workgroup} workgroups={workgroups} />
+                                <br /></p>
                         </div>
                     ) : (
                         <p>Loading...</p>
@@ -93,20 +93,22 @@ export default function ActivityView({ params }) {
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
                     <div className={styles.avatar}>
-                        <Image src="/msalogo.png"
-                            alt="User Avatar"
-                            width={600}
-                            height={600}
-                            className={styles.logoImage} />
+                        <Link href="/dashboard">
+                            <Image src="/msalogo.png"
+                                alt="User Avatar"
+                                width={600}
+                                height={600}
+                                className={styles.logoImage} />
+                        </Link>
                     </div>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/dashboard" scroll={false}><FaTh/> Dashboard</Link>
+                        <Link href="/dashboard" scroll={false}><FaTh /> Dashboard</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/activity" scroll={false}><FaClipboardList/> Activity</Link>
+                        <Link href="/activity" scroll={false}><FaClipboardList /> Activity</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/workgroups" scroll={false}><FaUsers/> Workgroup</Link>
+                        <Link href="/workgroups" scroll={false}><FaUsers /> Workgroup</Link>
                     </li>
                 </ul>
             </nav>

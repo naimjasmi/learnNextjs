@@ -6,7 +6,7 @@ import styles from './activity.module.css';
 import DataTable from 'react-data-table-component';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { FaUsers, FaClipboardList, FaTh } from "react-icons/fa";
+import { FaUsers, FaClipboardList, FaTh, FaPlusCircle, FaMapMarkerAlt } from "react-icons/fa";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -180,12 +180,12 @@ export default function ActivityPage() {
             <div className={styles['form-wrapper']}>
 
                 <button style={{ marginRight: '10px' }} onClick={() => router.push(`/activity/Map`)} className={styles.addButton}>
-                    Maps
+                    Maps <FaMapMarkerAlt />
                 </button>
 
                 {!showAddActivityForm && (
                     <button onClick={toggleAddActivityForm} className={styles.addButton}>
-                        Add New Activity
+                        Add New Activity <FaPlusCircle />
                     </button>
                 )}
 
@@ -207,8 +207,9 @@ export default function ActivityPage() {
                             <input type="text" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
                             <input type="text" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
                             <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-                            <select value={worktype} onChange={(e) => setWorkType(Array.from(e.target.selectedOptions, option => option.value))}>
-                                <option value="" disabled selected>Work Type</option>
+                            <span>Work Type</span>
+                            <select className="custom-select" multiple value={worktype} onChange={(e) => setWorkType(Array.from(e.target.selectedOptions, option => option.value))}>
+                               
                                 <option value="33316552-79b4-4172-b8ee-2828cfe9b272">WT001 : Open Trench</option>
                                 <option value="7de27d79-c6ea-4e5b-8005-92e0c0df3aa8">WT002 : Cable Pulling/Splicing</option>
                                 <option value="56c16e68-f697-4cae-ae16-5dbbaa0a9aa0">WT003 : Sub-duct Installation</option>
@@ -230,20 +231,22 @@ export default function ActivityPage() {
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
                     <div className={styles.avatar}>
-                        <Image src="/msalogo.png"
-                            alt="User Avatar"
-                            width={600}
-                            height={600}
-                            className={styles.logoImage} />
+                        <Link href="/dashboard">
+                            <Image src="/msalogo.png"
+                                alt="User Avatar"
+                                width={600}
+                                height={600}
+                                className={styles.logoImage} />
+                        </Link>
                     </div>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/dashboard" scroll={false}><FaTh/> Dashboard</Link>
+                        <Link href="/dashboard" scroll={false}><FaTh /> Dashboard</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/activity" scroll={false}><FaClipboardList/> Activity</Link>
+                        <Link href="/activity" scroll={false}><FaClipboardList /> Activity</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/workgroups" scroll={false}><FaUsers/> Workgroup</Link>
+                        <Link href="/workgroups" scroll={false}><FaUsers /> Workgroup</Link>
                     </li>
                 </ul>
             </nav>
