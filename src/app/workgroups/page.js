@@ -7,7 +7,7 @@ import styles from './workgroups.module.css';
 import Image from 'next/image';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaUsers, FaClipboardList, FaTh } from "react-icons/fa";
+import { FaUsers, FaClipboardList, FaTh, FaTrashAlt, FaEdit, FaPlusCircle } from "react-icons/fa";
 
 export default function WorkgroupsPage() {
     const [data, setData] = useState([]);
@@ -117,8 +117,8 @@ export default function WorkgroupsPage() {
                                     <td>{wg.wgid}</td>
                                     <td>{wg.description}</td>
                                     <td>
-                                        <button className={`${styles.button} ${styles.edit}`} onClick={() => handleEdit(wg)}>Edit</button><br />
-                                        <button className={`${styles.button} ${styles.delete}`} onClick={() => handleDelete(wg.id)}>Delete</button>
+                                        <button className={`${styles.button} ${styles.edit}`} onClick={() => handleEdit(wg)}><FaEdit /> Edit</button><br />
+                                        <button className={`${styles.button} ${styles.delete}`} onClick={() => handleDelete(wg.id)}><FaTrashAlt /> Delete</button>
                                     </td>
                                 </tr>
                             ))}
@@ -127,7 +127,7 @@ export default function WorkgroupsPage() {
                 </div>
                 <div className={styles['form-wrapper']}>
                     {!showAddForm ? (
-                        <button onClick={() => setShowAddForm(true)} className={styles.addButton}>Add New Workgroup</button>
+                        <button onClick={() => setShowAddForm(true)} className={styles.addButton}>Add New Workgroup <FaPlusCircle /></button>
                     ) : (
                         <div className={styles.card}>
                             <form className={styles.form} onSubmit={handleSubmit}>
@@ -161,20 +161,22 @@ export default function WorkgroupsPage() {
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
                     <div className={styles.avatar}>
-                        <Image src="/msalogo.png"
-                            alt="User Avatar"
-                            width={600}
-                            height={600}
-                            className={styles.logoImage} />
+                        <Link href="/dashboard">
+                            <Image src="/msalogo.png"
+                                alt="User Avatar"
+                                width={600}
+                                height={600}
+                                className={styles.logoImage} />
+                        </Link>
                     </div>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/dashboard" scroll={false}><FaTh/> Dashboard</Link>
+                        <Link href="/dashboard" scroll={false}><FaTh /> Dashboard</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/activity" scroll={false}><FaClipboardList/> Activity</Link>
+                        <Link href="/activity" scroll={false}><FaClipboardList /> Activity</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/workgroups" scroll={false}><FaUsers/> Workgroup</Link>
+                        <Link href="/workgroups" scroll={false}><FaUsers /> Workgroup</Link>
                     </li>
                 </ul>
             </nav>

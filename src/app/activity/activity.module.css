@@ -46,8 +46,18 @@
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 30px;
-    max-width: 500px;
+    max-width: 100%;
     margin: 0 auto;
+}
+
+.custom-select {
+    height: auto;
+    overflow-y: hidden;
+}
+
+.custom-select select {
+    overflow-y: hidden;
+    height: auto;
 }
 
 .close-button {
@@ -65,7 +75,6 @@
     display: flex;
     flex-direction: column;
 }
-
 
 .form h2 {
     font-size: 24px;
@@ -211,6 +220,7 @@
     background-color: #d32f2f;
     /* Change hover background color */
 }
+
 .form select {
     margin-bottom: 20px;
     padding: 12px;
@@ -221,6 +231,8 @@
     font-size: 16px;
     background-color: #fff; /* Add a white background */
     color: #333; /* Set text color */
+    height: auto; /* Ensure auto height */
+    overflow-y: auto; /* Hide vertical scrollbar */
 }
 
 /* Style the dropdown arrow */
@@ -232,6 +244,7 @@
 .form select:focus {
     border-color: #007bff; /* Change border color on hover/focus */
 }
+
 .avatar {
     margin-bottom: 20px;
 }
@@ -246,6 +259,3 @@
     height: 70px;
     border-radius: 20%;
 }
-
-
-

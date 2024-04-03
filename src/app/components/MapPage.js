@@ -6,6 +6,8 @@ import L from 'leaflet';
 import MarkerIcon from '../../../node_modules/leaflet/dist/images/marker-icon.png';
 import MarkerShadow from '../../../node_modules/leaflet/dist/images/marker-shadow.png';
 import { useRouter } from 'next/navigation';
+import { FaExternalLinkAlt} from "react-icons/fa";
+
 
 const MapPage = () => {
     const router = useRouter();
@@ -32,7 +34,7 @@ const MapPage = () => {
     };
 
     return (
-        <div style={{ height: '80vh', width: '82vw' }}>
+        <div style={{ height: '400px', width: '82vw' }}>
             <MapContainer style={{ height: '100%', width: '100%' }} center={[2.921300, 101.655900]} zoom={16} scrollWheelZoom={true}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

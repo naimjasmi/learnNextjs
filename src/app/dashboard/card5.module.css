@@ -1,0 +1,88 @@
+/* usercard.module.css */
+
+.usercard {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.avatar {
+    margin-bottom: 20px;
+}
+
+.avatarImage {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.logoImage {
+    width: auto;
+    height: 70px;
+    border-radius: 20%;
+}
+
+.userInfo {
+    text-align: center;
+}
+
+.usercard h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.usercard p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.usercard .contact {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.bio {
+    margin-top: 20px;
+    text-align: center;
+    color: #666;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    margin-left: 220px;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.page-subtitle {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.form button:hover {
+    background-color: #0056b3;
+}

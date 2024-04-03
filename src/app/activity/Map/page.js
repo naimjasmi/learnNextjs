@@ -21,20 +21,22 @@ export default function WorkMap() {
             <nav className={styles['sidebar']}>
                 <ul className={styles['sidebar-list']}>
                     <div className={styles.avatar}>
-                        <Image src="/msalogo.png"
-                            alt="User Avatar"
-                            width={600}
-                            height={600}
-                            className={styles.logoImage} />
+                        <Link href="/dashboard">
+                            <Image src="/msalogo.png"
+                                alt="User Avatar"
+                                width={600}
+                                height={600}
+                                className={styles.logoImage} />
+                        </Link>
                     </div>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/dashboard" scroll={false}><FaTh/> Dashboard</Link>
+                        <Link href="/dashboard" scroll={false}><FaTh /> Dashboard</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/activity" scroll={false}><FaClipboardList/> Activity</Link>
+                        <Link href="/activity" scroll={false}><FaClipboardList /> Activity</Link>
                     </li>
                     <li className={styles['sidebar-item']}>
-                        <Link href="/workgroups" scroll={false}><FaUsers/> Workgroup</Link>
+                        <Link href="/workgroups" scroll={false}><FaUsers /> Workgroup</Link>
                     </li>
                 </ul>
             </nav>
