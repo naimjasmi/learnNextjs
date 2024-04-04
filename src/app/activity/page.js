@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { FaUsers, FaClipboardList, FaTh, FaPlusCircle, FaMapMarkerAlt } from "react-icons/fa";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CustomSelect from '../components/CustomSelect';
 
 export default function ActivityPage() {
     const router = useRouter();
@@ -42,10 +43,8 @@ export default function ActivityPage() {
 
     const addActivity = async () => {
         try {
-            // Convert worktype and workgroup to arrays if they are strings
             const workTypeArray = Array.isArray(worktype) ? worktype : [worktype];
             const workGroupArray = Array.isArray(workgroup) ? workgroup : [workgroup];
-
             const response = await axios.post('http://172.16.1.166:8000/activities/', {
                 activityid,
                 date,
@@ -203,22 +202,25 @@ export default function ActivityPage() {
                                 <option value="cloudy">Cloudy</option>
                                 <option value="lightrain">Light Rain</option>
                                 <option value="heavyrain">Heavy Rain</option>
-                            </select>
+                            </select><br />
                             <input type="text" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
                             <input type="text" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
                             <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-                            <span>Work Type</span>
-                            <select className="custom-select" multiple value={worktype} onChange={(e) => setWorkType(Array.from(e.target.selectedOptions, option => option.value))}>
-                               
-                                <option value="33316552-79b4-4172-b8ee-2828cfe9b272">WT001 : Open Trench</option>
-                                <option value="7de27d79-c6ea-4e5b-8005-92e0c0df3aa8">WT002 : Cable Pulling/Splicing</option>
-                                <option value="56c16e68-f697-4cae-ae16-5dbbaa0a9aa0">WT003 : Sub-duct Installation</option>
-                                <option value="3a46a618-ba51-4be0-8b60-9eed35b20882">WT004 : HDD - Duct Pulling</option>
-                                <option value="a95703d9-d3bf-4dac-b18f-4da1524b41ca">WT005 : HDD - Reaming</option>
-                                <option value="38e1587e-f67d-4616-82ac-4d6bf640afdd">WT006 : HDD - Piloting</option>
-                                <option value="d76d7d11-7b68-4d34-b18c-2b7dff10f195">WT007 : Cable Signal Testing</option>
-                            </select>
-                            <input type="text" placeholder="Work Group" value={workgroup} onChange={(e) => setWorkGroup(e.target.value)} />
+                            <span className='mb-2'>Work Type</span>
+                            <CustomSelect
+                                options={[
+                                    { value: '33316552-79b4-4172-b8ee-2828cfe9b272', label: 'Open Trench' },
+                                    { value: '7de27d79-c6ea-4e5b-8005-92e0c0df3aa8', label: 'Cable Pulling/Splicing' },
+                                    { value: '56c16e68-f697-4cae-ae16-5dbbaa0a9aa0', label: 'Sub-duct Installation' },
+                                    { value: '3a46a618-ba51-4be0-8b60-9eed35b20882', label: 'HDD - Duct Pulling' },
+                                    { value: 'a95703d9-d3bf-4dac-b18f-4da1524b41ca', label: 'HDD - Reaming' },
+                                    { value: '38e1587e-f67d-4616-82ac-4d6bf640afdd', label: 'HDD - Piloting' },
+                                    { value: 'd76d7d11-7b68-4d34-b18c-2b7dff10f195', label: 'Cable Signal Testing' }
+                                ]}
+                                value={worktype}
+                                onChange={setWorkType} // <-- Update this line
+                            />
+                            <input className='mt-2' type="text" placeholder="Work Group" value={workgroup} onChange={(e) => setWorkGroup(e.target.value)} />
                             <div>
                                 <button type="submit" className={`${styles.add} ${styles.addButton}`}>Add</button>
                                 <button type="button" className={`${styles.cancel} ${styles.cancelButton}`} onClick={toggleAddActivityForm}>Cancel</button>
