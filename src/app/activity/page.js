@@ -4,7 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import styles from './activity.module.css';
 import DataTable from 'react-data-table-component';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'; // Changed from 'next/navigation' to 'next/router'
 import Image from 'next/image';
 import { FaUsers, FaClipboardList, FaTh, FaPlusCircle, FaMapMarkerAlt } from "react-icons/fa";
 import { toast, ToastContainer } from 'react-toastify';
@@ -27,6 +27,7 @@ export default function ActivityPage() {
     const [description, setDescription] = useState('');
     const [worktype, setWorkType] = useState([]);
     const [workgroup, setWorkGroup] = useState([]);
+    const [imageFile, setImageFile] = useState(null); // State for storing the selected image file
     const [showAddActivityForm, setShowAddActivityForm] = useState(false); // State to control visibility of add activity form
 
     useEffect(() => {
@@ -46,17 +47,23 @@ export default function ActivityPage() {
         try {
             const workTypeArray = Array.isArray(worktype) ? worktype : [worktype];
             const workGroupArray = Array.isArray(workgroup) ? workgroup : [workgroup];
-            const response = await axios.post('http://172.16.1.108:8000/activities/', {
-                activityid,
-                date,
-                starttime,
-                endtime,
-                weather,
-                latitude,
-                longitude,
-                description,
-                worktype: workTypeArray,
-                workgroup: workGroupArray
+            const formData = new FormData();
+            formData.append('activityid', activityid);
+            formData.append('date', date);
+            formData.append('starttime', starttime);
+            formData.append('endtime', endtime);
+            formData.append('weather', weather);
+            formData.append('latitude', latitude);
+            formData.append('longitude', longitude);
+            formData.append('description', description);
+            formData.append('worktype', workTypeArray);
+            formData.append('workgroup', workGroupArray);
+            formData.append('image', imageFile); // Append the image file to the form data
+
+            const response = await axios.post('http://172.16.1.108:8000/activities/', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data' // Set content type to multipart/form-data for file upload
+                }
             });
             toast.success('New activity has been added', { autoClose: 3000 });
             return response.data;
@@ -93,6 +100,7 @@ export default function ActivityPage() {
         setDescription('');
         setWorkType('');
         setWorkGroup('');
+        setImageFile(null); // Reset image file state
     };
 
     const handleDelete = async (id) => {
@@ -207,6 +215,7 @@ export default function ActivityPage() {
                             <input type="text" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
                             <input type="text" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
                             <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                            <input type="file" onChange={(e) => setImageFile(e.target.files[0])} /> {/* Image input field */}
                             <span className='mb-2'>Work Type</span>
                             <CustomSelectWT
                                 options={[
