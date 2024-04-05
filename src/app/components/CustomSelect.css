@@ -1,16 +1,15 @@
 /* CustomSelect.css */
+
 .customSelect {
-    height: auto;
-    overflow: hidden;
+    position: relative;
+    width: 100%;
+    cursor: pointer;
 }
 
-.customSelect select {
-    padding: 12px;
-    height: auto;
-}
-
-.customSelect select {
-    height: auto;
+.selectInput {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 12px;
     border-radius: 6px;
     border: 1px solid #ccc;
@@ -19,5 +18,45 @@
     font-size: 16px;
     background-color: #fff;
     color: #333;
-    overflow-y: visible; /* Remove vertical scrollbar */
+    cursor: pointer;
+}
+
+.selectedOption {
+    flex-grow: 1;
+    padding-right: 20px; /* Adjust as needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.optionList {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: #fff;
+    z-index: 10;
+    max-height: 150px; /* Adjust as needed */
+    overflow-y: auto;
+    cursor: pointer;
+}
+
+/* CustomSelect.css */
+
+.option {
+    padding: 10px;
+    cursor: pointer !important; /* Set cursor to pointer */
+}
+
+.option:hover {
+    background-color: #f0f0f0; /* Set background color on hover */
+    cursor: pointer !important; /* Set cursor to pointer */
+}
+
+.selected {
+    background-color: #ffa500; /* Set background color for selected option */
 }

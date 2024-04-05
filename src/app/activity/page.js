@@ -9,7 +9,8 @@ import Image from 'next/image';
 import { FaUsers, FaClipboardList, FaTh, FaPlusCircle, FaMapMarkerAlt } from "react-icons/fa";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import CustomSelect from '../components/CustomSelect';
+import CustomSelectWT from '../components/CustomSelectWT';
+import CustomSelectWG from '../components/CustomSelectWG';
 
 export default function ActivityPage() {
     const router = useRouter();
@@ -207,7 +208,7 @@ export default function ActivityPage() {
                             <input type="text" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
                             <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                             <span className='mb-2'>Work Type</span>
-                            <CustomSelect
+                            <CustomSelectWT
                                 options={[
                                     { value: '33316552-79b4-4172-b8ee-2828cfe9b272', label: 'Open Trench' },
                                     { value: '7de27d79-c6ea-4e5b-8005-92e0c0df3aa8', label: 'Cable Pulling/Splicing' },
@@ -220,7 +221,18 @@ export default function ActivityPage() {
                                 value={worktype}
                                 onChange={setWorkType}
                             />
-                            <input className='mt-2' type="text" placeholder="Work Group" value={workgroup} onChange={(e) => setWorkGroup(e.target.value)} />
+                            <span className='mb-2'>Work Group</span>
+                            <CustomSelectWG
+                                options={[
+                                    { value: '20b18b00-0c4c-4dd5-a5cf-c1dade354a63', label: 'Excavation Team 1' },
+                                    { value: '4aa0850b-92bb-4c07-a327-29bcca4598b8', label: 'Fiber Optic Installer Team 1' },
+                                    { value: '579d5fef-b82a-4755-828f-025e9a8ecc3d', label: 'Tester Team 1' },
+                                    { value: '0a1e1438-eaed-45a5-9dab-ee633a771118', label: 'Tester Team 2' },
+                                ]}
+                                value={workgroup}
+                                onChange={setWorkGroup}
+                            /><br/>
+                            
                             <div>
                                 <button type="submit" className={`${styles.add} ${styles.addButton}`}>Add</button>
                                 <button type="button" className={`${styles.cancel} ${styles.cancelButton}`} onClick={toggleAddActivityForm}>Cancel</button>
