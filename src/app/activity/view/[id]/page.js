@@ -1,4 +1,5 @@
-'use client'
+"use client"
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './view.module.css';
@@ -72,7 +73,11 @@ export default function ActivityView({ params }) {
                             <p>End Time: {activityData.endtime}</p>
                             <p>Weather: {activityData.weather}</p>
                             <p>Description: {activityData.description}</p>
-
+                            {activityData.image && ( // Check if image data is available
+                                <div className={styles.imageContainer}>
+                                    <img src={activityData.image} alt="Activity Image" className={styles.image} />
+                                </div>
+                            )}
                             <p>Work Type: <Worktype activitywt={activityData.worktype} worktype={worktype} />
                                 <br /></p>
                             <p>Work Group: <Workgroup activitywg={activityData.workgroup} workgroups={workgroups} />
