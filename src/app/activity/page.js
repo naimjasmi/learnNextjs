@@ -34,7 +34,7 @@ export default function ActivityPage() {
 
     const fetchData = async () => {
         try {
-            const { data: res } = await axios.get('http://172.16.1.166:8000/activities/');
+            const { data: res } = await axios.get('http://172.16.1.108:8000/activities/');
             setData(res);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -45,7 +45,7 @@ export default function ActivityPage() {
         try {
             const workTypeArray = Array.isArray(worktype) ? worktype : [worktype];
             const workGroupArray = Array.isArray(workgroup) ? workgroup : [workgroup];
-            const response = await axios.post('http://172.16.1.166:8000/activities/', {
+            const response = await axios.post('http://172.16.1.108:8000/activities/', {
                 activityid,
                 date,
                 starttime,
@@ -96,7 +96,7 @@ export default function ActivityPage() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://172.16.1.166:8000/activities/${id}/`);
+            await axios.delete(`http://172.16.1.108:8000/activities/${id}/`);
             fetchData(); // Refresh the data after deletion
             toast.success('Activity has been deleted', { autoClose: 3000 });
         } catch (error) {
@@ -218,7 +218,7 @@ export default function ActivityPage() {
                                     { value: 'd76d7d11-7b68-4d34-b18c-2b7dff10f195', label: 'Cable Signal Testing' }
                                 ]}
                                 value={worktype}
-                                onChange={setWorkType} // <-- Update this line
+                                onChange={setWorkType}
                             />
                             <input className='mt-2' type="text" placeholder="Work Group" value={workgroup} onChange={(e) => setWorkGroup(e.target.value)} />
                             <div>

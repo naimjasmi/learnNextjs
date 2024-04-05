@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './CustomSelect.css'; // Import your CSS file for styling
+import { FaAngleDown } from "react-icons/fa"; // Import the icon you want to use
 
 const CustomSelect = ({ options, value, onChange }) => {
     const [open, setOpen] = useState(false);
@@ -19,14 +20,18 @@ const CustomSelect = ({ options, value, onChange }) => {
 
     return (
         <div className={styles.customSelect}>
-            <input
-                type="text"
-                value={value.map((val) => options.find((option) => option.value === val)?.label).join(', ')}
-                placeholder="Select an option"
-                className={styles.selectedOption}
-                onClick={toggleOpen}
-                readOnly
-            />
+            <div className={styles.selectInput} onClick={toggleOpen}>
+                <input
+                    type="text"
+                    value={value.map((val) => options.find((option) => option.value === val)?.label).join(', ')}
+                    placeholder="Select an option"
+                    className={styles.selectedOption}
+                    readOnly
+                />
+                <div className={styles.dropdownIcon} onClick={toggleOpen}>
+                    <FaAngleDown />
+                </div>
+            </div>
             {open && (
                 <div className={styles.optionList}>
                     {options.map((option) => (

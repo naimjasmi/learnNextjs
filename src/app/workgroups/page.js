@@ -24,7 +24,7 @@ export default function WorkgroupsPage() {
 
     const fetchData = async () => {
         try {
-            const { data: res } = await axios.get('http://172.16.1.166:8000/workgroups/');
+            const { data: res } = await axios.get('http://172.16.1.108:8000/workgroups/');
             setData(res);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -33,7 +33,7 @@ export default function WorkgroupsPage() {
 
     const addWorkgroup = async ({ name, wgid, description }) => {
         try {
-            const response = await axios.post('http://172.16.1.166:8000/workgroups/', { name, wgid, description });
+            const response = await axios.post('http://172.16.1.108:8000/workgroups/', { name, wgid, description });
             return response.data;
         } catch (error) {
             throw new Error('Failed to add workgroup: ' + error.message);
@@ -42,7 +42,7 @@ export default function WorkgroupsPage() {
 
     const deleteWorkgroup = async (id) => {
         try {
-            await axios.delete(`http://172.16.1.166:8000/workgroups/${id}/`);
+            await axios.delete(`http://172.16.1.108:8000/workgroups/${id}/`);
             setData(data.filter(workgroup => workgroup.id !== id));
         } catch (error) {
             console.error('Error deleting workgroup:', error);
@@ -73,7 +73,7 @@ export default function WorkgroupsPage() {
     const handleSubmitEdit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://172.16.1.166:8000/workgroups/${editData.id}/`, editData);
+            await axios.put(`http://172.16.1.108:8000/workgroups/${editData.id}/`, editData);
             setShowEditForm(false);
             fetchData();
             toast.success('Workgroup has been edited', { autoClose: 3000 });
