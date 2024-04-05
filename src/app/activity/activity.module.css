@@ -31,17 +31,14 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* semi-transparent black overlay */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 999;
-    /* ensure the edit form appears above other content */
 }
 
 .card {
     position: relative;
-    /* Ensure relative positioning for the parent */
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -52,12 +49,37 @@
 
 .custom-select {
     height: auto;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 .custom-select select {
-    overflow-y: hidden;
+    padding: 12px;
     height: auto;
+}
+
+.form select {
+    height: auto;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+    overflow-y: visible; /* Remove vertical scrollbar */
+}
+
+
+
+.form select:hover,
+.form select:focus {
+    border-color: #007bff;
+    overflow-y: auto;
+}
+
+.form select::-ms-expand {
+    display: none;
 }
 
 .close-button {
@@ -140,9 +162,7 @@
 
 .button {
     width: 100px;
-    /* Set the width as needed */
     padding: 10px;
-    /* Add padding to adjust the button size */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -199,50 +219,20 @@
 
 .addButton {
     background-color: #4caf50;
-    /* Change the background color */
     color: white;
-    /* Change the text color */
 }
 
 .addButton:hover {
     background-color: #3d8c40;
-    /* Change the background color */
 }
 
 .cancelButton {
     background-color: #f44336;
-    /* Change the background color */
     color: white;
-    /* Change the text color */
 }
 
 .cancelButton:hover {
     background-color: #d32f2f;
-    /* Change hover background color */
-}
-
-.form select {
-    margin-bottom: 20px;
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    width: 100%;
-    font-size: 16px;
-    background-color: #fff; /* Add a white background */
-    color: #333; /* Set text color */
-    height: auto; /* Ensure auto height */
-    overflow-y: auto; /* Hide vertical scrollbar */
-}
-
-/* Style the dropdown arrow */
-.form select::-ms-expand {
-    display: none; /* Hide the default arrow in IE */
-}
-
-.form select:hover,
-.form select:focus {
-    border-color: #007bff; /* Change border color on hover/focus */
 }
 
 .avatar {
@@ -254,6 +244,7 @@
     height: 100px;
     border-radius: 50%;
 }
+
 .logoImage {
     width: auto;
     height: 70px;
