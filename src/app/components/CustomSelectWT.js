@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './CustomSelect.css'; // Import your CSS file for styling
-import { FaAngleDown } from "react-icons/fa"; // Import the icon you want to use
+import { FaAngleDown, FaHandPointer } from "react-icons/fa"; // Import the icon you want to use
 
-const CustomSelect = ({ options, value, onChange }) => {
+const CustomSelectWT = ({ options, value, onChange }) => {
     const [open, setOpen] = useState(false);
 
     const toggleOpen = () => {
@@ -16,36 +16,34 @@ const CustomSelect = ({ options, value, onChange }) => {
         onChange(newValue);
     };
 
-    const isSelected = (option) => value.includes(option.value);
-
     return (
         <div className={styles.customSelect}>
             <div className={styles.selectInput} onClick={toggleOpen}>
                 <input
                     type="text"
                     value={value.map((val) => options.find((option) => option.value === val)?.label).join(', ')}
-                    placeholder="Select an option"
+                    placeholder="Select Work Type"
                     className={styles.selectedOption}
+                    style={{ cursor: 'pointer'}}
                     readOnly
                 />
-                <div className={styles.dropdownIcon} onClick={toggleOpen}>
-                    <FaAngleDown />
-                </div>
             </div>
             {open && (
                 <div className={styles.optionList}>
                     {options.map((option) => (
                         <div
                             key={option.value}
-                            className={`${styles.option} ${isSelected(option) && styles.selected}`}
+                            className={styles.option}
                             onClick={() => handleSelect(option)}
+                            style={{ cursor: 'pointer', backgroundColor: value.includes(option.value) ? '#ffa500' : 'inherit' }}
                         >
                             {option.label}
                         </div>
                     ))}
                 </div>
+
             )}
         </div>
     );
 };
-export default CustomSelect;
+export default CustomSelectWT;
