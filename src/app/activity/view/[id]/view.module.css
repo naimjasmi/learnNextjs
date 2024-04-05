@@ -184,3 +184,18 @@
     height: 70px;
     border-radius: 20%;
 }
+
+.imageCard {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.image {
+    max-width: 100%; /* Ensure image doesn't exceed card width */
+    height: auto; /* Maintain aspect ratio */
+}
