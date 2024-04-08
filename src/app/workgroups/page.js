@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaUsers, FaClipboardList, FaTh, FaTrashAlt, FaEdit, FaPlusCircle } from "react-icons/fa";
+import Sidebar from "../components/Sidebar";
 
 export default function WorkgroupsPage() {
     const [data, setData] = useState([]);
@@ -157,30 +158,7 @@ export default function WorkgroupsPage() {
                     </div>
                 </div>
             )}
-
-            <nav className={styles['sidebar']}>
-                <ul className={styles['sidebar-list']}>
-                    <div className={styles.avatar}>
-                        <Link href="/dashboard">
-                            <Image src="/msalogo.png"
-                                alt="User Avatar"
-                                width={600}
-                                height={600}
-                                className={styles.logoImage} />
-                        </Link>
-                    </div>
-                    <li className={styles['sidebar-item']}>
-                        <Link href="/dashboard" scroll={false}><FaTh /> Dashboard</Link>
-                    </li>
-                    <li className={styles['sidebar-item']}>
-                        <Link href="/activity" scroll={false}><FaClipboardList /> Activity</Link>
-                    </li>
-                    <li className={styles['sidebar-item']}>
-                        <Link href="/workgroups" scroll={false}><FaUsers /> Workgroup</Link>
-                    </li>
-                </ul>
-            </nav>
-
+            <Sidebar />
             <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
         </>
     );

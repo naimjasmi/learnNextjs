@@ -143,26 +143,6 @@
     bottom: 0;
 }
 
-.sidebar-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.sidebar-item {
-    margin-bottom: 10px;
-}
-
-.sidebar-item a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-}
-
-.sidebar-item a:hover {
-    color: #007bff;
-}
-
 .button {
     width: 100px;
     padding: 10px;

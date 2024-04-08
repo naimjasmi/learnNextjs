@@ -9,6 +9,7 @@ import Workgroup from '@/app/components/Workgroup';
 import Worktype from '@/app/components/Worktype';
 import Image from 'next/image';
 import { FaUsers, FaClipboardList, FaTh } from "react-icons/fa";
+import Sidebar from '@/app/components/Sidebar';
 
 export default function ActivityView({ params }) {
     const [activityData, setActivityData] = useState(null);
@@ -94,29 +95,7 @@ export default function ActivityView({ params }) {
                     )}
                 </div>
             </div>
-
-            <nav className={styles['sidebar']}>
-                <ul className={styles['sidebar-list']}>
-                    <div className={styles.avatar}>
-                        <Link href="/dashboard">
-                            <Image src="/msalogo.png"
-                                alt="User Avatar"
-                                width={600}
-                                height={600}
-                                className={styles.logoImage} />
-                        </Link>
-                    </div>
-                    <li className={styles['sidebar-item']}>
-                        <Link href="/dashboard" scroll={false}><FaTh /> Dashboard</Link>
-                    </li>
-                    <li className={styles['sidebar-item']}>
-                        <Link href="/activity" scroll={false}><FaClipboardList /> Activity</Link>
-                    </li>
-                    <li className={styles['sidebar-item']}>
-                        <Link href="/workgroups" scroll={false}><FaUsers /> Workgroup</Link>
-                    </li>
-                </ul>
-            </nav>
+            <Sidebar />
         </>
     )
 }
