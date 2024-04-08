@@ -11,6 +11,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CustomSelectWT from '../components/CustomSelectWT';
 import CustomSelectWG from '../components/CustomSelectWG';
+import Sidebar from "../components/Sidebar";
 
 export default function ActivityPage() {
     const router = useRouter();
@@ -240,41 +241,39 @@ export default function ActivityPage() {
                                 ]}
                                 value={workgroup}
                                 onChange={setWorkGroup}
-                            /><br/>
-                            
+                            /><br />
+
                             <div>
-                                <button type="submit" className={`${styles.add} ${styles.addButton}`}>Add</button>
-                                <button type="button" className={`${styles.cancel} ${styles.cancelButton}`} onClick={toggleAddActivityForm}>Cancel</button>
+                                <button
+                                    type="submit"
+                                    className={`${styles.add} ${styles.addButton}`}>
+                                    Add
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`${styles.cancel} ${styles.cancelButton}`}
+                                    onClick={toggleAddActivityForm}>
+                                    Cancel
+                                </button>
                             </div>
                         </form>
                     </div>
 
                 )}
             </div>
-            <nav className={styles['sidebar']}>
-                <ul className={styles['sidebar-list']}>
-                    <div className={styles.avatar}>
-                        <Link href="/dashboard">
-                            <Image src="/msalogo.png"
-                                alt="User Avatar"
-                                width={600}
-                                height={600}
-                                className={styles.logoImage} />
-                        </Link>
-                    </div>
-                    <li className={styles['sidebar-item']}>
-                        <Link href="/dashboard" scroll={false}><FaTh /> Dashboard</Link>
-                    </li>
-                    <li className={styles['sidebar-item']}>
-                        <Link href="/activity" scroll={false}><FaClipboardList /> Activity</Link>
-                    </li>
-                    <li className={styles['sidebar-item']}>
-                        <Link href="/workgroups" scroll={false}><FaUsers /> Workgroup</Link>
-                    </li>
-                </ul>
-            </nav>
 
-            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+            <Sidebar />
+
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </>
     );
 }

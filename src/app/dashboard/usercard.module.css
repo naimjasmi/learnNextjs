@@ -109,16 +109,3 @@
     margin: 0;
 }
 
-.sidebar-item {
-    margin-bottom: 10px;
-}
-
-.sidebar-item a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-}
-
-.sidebar-item a:hover {
-    color: #007bff;
-}
