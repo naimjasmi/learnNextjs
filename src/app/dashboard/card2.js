@@ -17,7 +17,7 @@ export default function Card2() {
 
     const fetchWorkgroupData = async () => {
         try {
-            const response = await axios.get('http://172.16.1.108:8000/workgroups/');
+            const response = await axios.get('http://172.16.1.123:8000/workgroups/');
             const workgroups = response.data;
             const workgroupCount = countWorkgroups(workgroups);
             setWorkgroupData(workgroupCount);

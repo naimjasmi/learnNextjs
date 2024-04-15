@@ -37,7 +37,7 @@ export default function ActivityPage() {
 
     const fetchData = async () => {
         try {
-            const { data: res } = await axios.get('http://172.16.1.108:8000/activities/');
+            const { data: res } = await axios.get('http://172.16.1.123:8000/activities/');
             setData(res);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -61,7 +61,7 @@ export default function ActivityPage() {
             formData.append('workgroup', workGroupArray);
             formData.append('image', imageFile); // Append the image file to the form data
 
-            const response = await axios.post('http://172.16.1.108:8000/activities/', formData, {
+            const response = await axios.post('http://172.16.1.123:8000/activities/', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data' // Set content type to multipart/form-data for file upload
                 }
@@ -106,7 +106,7 @@ export default function ActivityPage() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://172.16.1.108:8000/activities/${id}/`);
+            await axios.delete(`http://172.16.1.123:8000/activities/${id}/`);
             fetchData(); // Refresh the data after deletion
             toast.success('Activity has been deleted', { autoClose: 3000 });
         } catch (error) {

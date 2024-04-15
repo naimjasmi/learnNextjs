@@ -19,7 +19,7 @@ const MapPage = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://172.16.1.108:8000/activities/');
+            const response = await axios.get('http://172.16.1.123:8000/activities/');
             const data = response.data;
             const newMarkers = data.map(activity => ({
                 position: [parseFloat(activity.latitude), parseFloat(activity.longitude)],
