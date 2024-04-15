@@ -10,7 +10,8 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
-    setIsOpen(!isOpen);
+    console.log("Toggling sidebar");
+    setIsOpen(prevIsOpen => !prevIsOpen);
   };
 
   return (
