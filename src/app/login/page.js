@@ -1,35 +1,32 @@
 'use client';
 
 import { useRouter } from "next/navigation";
-import(useRouter)
-export default function LoginPage() { 
+import styles from './login.module.css'; // Import CSS module for styling
 
-    const router = useRouter()
+export default function LoginPage() {
+    const router = useRouter();
 
-    function handleLogin(ev){
+    function handleLogin(ev) {
         ev.preventDefault();
-
         //login logic
-        router.push('/dashboard')
-
+        router.push('/dashboard');
     }
-    return ( 
-        <div> 
-            <h1>MSA eWorklog</h1> 
-            <form onSubmit={handleLogin}> 
-                <div> 
-                    <label htmlFor="loginid">Login</label> 
-                    <input type="text" id="loginid" /> 
-                </div> 
- 
-                <div> 
-                    <label htmlFor="password">Password</label> 
-                    <input type="password" id="password" /> 
-                </div> 
- 
-                <button type="submit">Login</button> 
-            </form> 
-            <footer></footer>
-        </div> 
-    ) 
+
+    return (
+        <div className={styles.container}>
+            <h1 className={styles.title}>MSA eWorklog</h1>
+            <form onSubmit={handleLogin} className={styles.form}>
+                <div className={styles.formGroup}>
+                    <label htmlFor="loginid" className={styles.label}>Login</label>
+                    <input type="text" id="loginid" className={styles.input} />
+                </div>
+                <div className={styles.formGroup}>
+                    <label htmlFor="password" className={styles.label}>Password</label>
+                    <input type="password" id="password" className={styles.input} />
+                </div>
+                <button type="submit" className={styles.button}>Login</button>
+            </form>
+            <footer className={styles.footer}></footer>
+        </div>
+    );
 }
