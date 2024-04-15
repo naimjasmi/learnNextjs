@@ -1,7 +1,7 @@
 "use client"
 
-import UserCard from "./usercard"
-import Link from "next/link"
+import UserCard from "./usercard";
+import Link from "next/link";
 import styles from './usercard.module.css';
 import Image from 'next/image';
 import Card1 from "./card1";
@@ -12,7 +12,6 @@ import Card5 from "./card5";
 import MapPage from '@/app/components/MapPage';
 import { FaUsers, FaClipboardList, FaTh } from "react-icons/fa";
 import Sidebar from "../components/Sidebar";
-
 
 export default function DashboardPage() {
     return (
@@ -31,6 +30,5 @@ export default function DashboardPage() {
             </div>
             <Sidebar />
         </div>
-
     )
 }
