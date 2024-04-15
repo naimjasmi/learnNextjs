@@ -19,7 +19,7 @@ export default function ActivityView({ params }) {
     useEffect(() => {
         async function getData() {
             try {
-                const { data: res } = await axios.get(`http://172.16.1.108:8000/workgroups/`)
+                const { data: res } = await axios.get(`http://172.16.1.123:8000/workgroups/`)
                 if (res) {
                     setWorkgroups(res)
                 }
@@ -34,7 +34,7 @@ export default function ActivityView({ params }) {
     useEffect(() => {
         async function getData() {
             try {
-                const { data: res } = await axios.get(`http://172.16.1.108:8000/worktype/`)
+                const { data: res } = await axios.get(`http://172.16.1.123:8000/worktype/`)
                 if (res) {
                     setWorktype(res)
                 }
@@ -49,7 +49,7 @@ export default function ActivityView({ params }) {
     useEffect(() => {
         const fetchActivityData = async () => {
             try {
-                const { data } = await axios.get(`http://172.16.1.108:8000/activities/${params.id}/`);
+                const { data } = await axios.get(`http://172.16.1.123:8000/activities/${params.id}/`);
                 setActivityData(data);
             } catch (error) {
                 console.error('Error fetching activity data:', error);
