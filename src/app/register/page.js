@@ -122,6 +122,7 @@ export default function RegisterPage() {
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
                     </div>
+                    <br/>
                     {passwordValidationError && <p className={styles.errorMessage}>{passwordValidationError}</p>}
                 </div>
                 <div className={styles.formGroup}>
