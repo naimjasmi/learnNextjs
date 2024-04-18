@@ -1,6 +1,6 @@
 /* login.module.css */
 .container {
-    max-width: 400px;
+    max-width: 450px;
     margin: 100px auto; /* Center the container vertically and horizontally */
     padding: 40px;
     border: 1px solid #ddd;
@@ -96,3 +96,10 @@
     cursor: pointer;
 }
 
+.passwordError {
+    color: red;
+}
+
+.passwordError li {
+    color: red;
+}

@@ -5,7 +5,7 @@ export default function Footer() {
     return (
         <div className="footer-container">
         <br/>
-            <div>GFIS @2024</div>
+            <div>© 2024 MSA eWorklog. All rights reserved.</div>
         </div>
     );
 }

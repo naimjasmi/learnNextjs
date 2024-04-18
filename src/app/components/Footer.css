@@ -1,6 +1,8 @@
-
 .footer-container {
+    position: fixed; /* Fixed positioning */
+    bottom: 0; /* Positioned at the bottom of the viewport */
+    margin-left: 200px;
+    width: 92%; /* Full width */
     text-align: center; /* Center-align the content */
-    margin-left: 220px; /* Adjusted to accommodate the sidebar width */
-    max-width: calc(100% - 240px); /* Adjusted width to fit the remaining space after considering the sidebar */
+    padding: 8px 0; /* Add some padding for better spacing */
 }
