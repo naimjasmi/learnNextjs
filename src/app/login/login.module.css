@@ -1,0 +1,98 @@
+/* login.module.css */
+.container {
+    max-width: 400px;
+    margin: 100px auto; /* Center the container vertically and horizontally */
+    padding: 40px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #007bff; /* Change title color to a primary color */
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s;
+}
+
+.input:focus {
+    border-color: #007bff;
+    outline: none; /* Remove default outline on focus */
+}
+
+.button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.extraLinks {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.link {
+    color: #007bff; /* Change link color to a primary color */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.link:hover {
+    color: #0056b3;
+}
+/* login.module.css */
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    width: 230px;
+    height: 150px;
+    border-radius: 30%; /* Rounded border for circular shape */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+.inputWithIcon {
+    position: relative;
+}
+
+.passwordToggle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+

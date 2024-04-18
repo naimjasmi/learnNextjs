@@ -57,8 +57,33 @@
   cursor: pointer;
 }
 
-.sidebar-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+.sidebarContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebarItems {
+  flex: 1;
+}
+
+.logout {
+  margin-top: auto;
+}
+
+.logout button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 8px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: #333;
+  font-weight: bold;
+}
+
+.logout button:hover {
+  color: #007bff;
 }
