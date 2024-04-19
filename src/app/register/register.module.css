@@ -1,4 +1,3 @@
-/* login.module.css */
 .container {
     max-width: 450px;
     margin: 100px auto; /* Center the container vertically and horizontally */
@@ -69,7 +68,6 @@
 .link:hover {
     color: #0056b3;
 }
-/* login.module.css */
 
 .logo {
     text-align: center;
@@ -82,6 +80,7 @@
     border-radius: 30%; /* Rounded border for circular shape */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
 }
+
 .inputWithIcon {
     position: relative;
 }
@@ -103,3 +102,37 @@
 .passwordError li {
     color: red;
 }
+
+.strengthLabel {
+    font-size: 0.8em;
+    color: #666;
+    text-align: right;
+}
+
+.passwordStrengthIndicator {
+    display: flex;
+    align-items: center;
+}
+
+.strengthBar {
+    height: 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+    flex-grow: 1;
+}
+
+.weak {
+    width: 20%; /* Adjust width based on strength */
+    background-color: red;
+}
+
+.normal {
+    width: 50%; /* Adjust width based on strength */
+    background-color: yellow;
+}
+
+.strong {
+    width: 100%; /* Adjust width based on strength */
+    background-color: green;
+}
+

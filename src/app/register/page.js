@@ -1,10 +1,9 @@
-// register.js
 'use client';
 
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import styles from './register.module.css'; // Import CSS module for styling
+import styles from './register.module.css';
 import Image from "next/image";
-import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function RegisterPage() {
@@ -15,6 +14,7 @@ export default function RegisterPage() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [passwordMatchError, setPasswordMatchError] = useState(false);
     const [passwordValidationError, setPasswordValidationError] = useState("");
+    const [passwordStrength, setPasswordStrength] = useState("");
 
     useEffect(() => {
         setPasswordValidationError(
@@ -29,6 +29,22 @@ export default function RegisterPage() {
             </p>
         );
     }, []);
+
+    useEffect(() => {
+        calculatePasswordStrength(password);
+    }, [password]);
+
+    function calculatePasswordStrength(password) {
+
+
+        if (password.length == 6 || /^[a-z]+$/.test(password)) {
+            setPasswordStrength("weak");
+        } else if (password.length >= 8 && password.length <= 11 && /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/.test(password)) {
+            setPasswordStrength("normal");
+        } else if (password.length >= 12 && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/.test(password)) {
+            setPasswordStrength("strong");
+        }
+    }
 
     function handleRegister(ev) {
         ev.preventDefault();
@@ -122,7 +138,11 @@ export default function RegisterPage() {
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
                     </div>
-                    <br/>
+                    <div className={styles.passwordStrengthIndicator}>
+                        <div className={`${styles.strengthBar} ${styles[passwordStrength]}`}></div>
+                        <span className={styles.strengthLabel}>{passwordStrength}</span>
+                    </div>
+                    <br />
                     {passwordValidationError && <p className={styles.errorMessage}>{passwordValidationError}</p>}
                 </div>
                 <div className={styles.formGroup}>
