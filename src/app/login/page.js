@@ -72,7 +72,7 @@ export default function LoginPage() {
                 <button type="submit" className={styles.button}>Login</button>
             </form>
             <div className={styles.extraLinks}>
-                <a href="#" onClick={handleForgotPassword} className={styles.link}>Forgot Password?</a><br/>
+                <a href="#" onClick={handleForgotPassword} className={styles.link}>Forgot Password?</a><br />
                 <span className={styles.linkText}>Don't have an account? </span>
                 <a href="#" onClick={handleRegister} className={styles.link}>Register Here</a>
             </div>
