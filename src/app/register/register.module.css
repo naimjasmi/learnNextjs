@@ -1,6 +1,7 @@
 .container {
     max-width: 450px;
-    margin: 100px auto; /* Center the container vertically and horizontally */
+    margin: 100px auto;
+    /* Center the container vertically and horizontally */
     padding: 40px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -12,7 +13,8 @@
     text-align: center;
     font-size: 32px;
     margin-bottom: 40px;
-    color: #007bff; /* Change title color to a primary color */
+    color: #007bff;
+    /* Change title color to a primary color */
 }
 
 .formGroup {
@@ -36,7 +38,8 @@
 
 .input:focus {
     border-color: #007bff;
-    outline: none; /* Remove default outline on focus */
+    outline: none;
+    /* Remove default outline on focus */
 }
 
 .button {
@@ -60,7 +63,8 @@
 }
 
 .link {
-    color: #007bff; /* Change link color to a primary color */
+    color: #007bff;
+    /* Change link color to a primary color */
     text-decoration: none;
     transition: color 0.3s;
 }
@@ -77,8 +81,10 @@
 .logo img {
     width: 230px;
     height: 150px;
-    border-radius: 30%; /* Rounded border for circular shape */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    border-radius: 30%;
+    /* Rounded border for circular shape */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add a subtle shadow */
 }
 
 .inputWithIcon {
@@ -106,33 +112,45 @@
 .strengthLabel {
     font-size: 0.8em;
     color: #666;
-    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.strengthText {
+    font-size: 0.8em;
+    color: #666;
+    margin-bottom: 5px;
 }
 
 .passwordStrengthIndicator {
     display: flex;
+    margin-top: 4px;
     align-items: center;
+    position: relative;
+    /* Add position relative */
 }
 
 .strengthBar {
     height: 5px;
     border-radius: 5px;
     margin-top: 5px;
-    flex-grow: 1;
+    transition: width 0.8s ease-in-out, background-color 0.8s ease-in-out; /* Added transition properties */
 }
 
 .weak {
-    width: 20%; /* Adjust width based on strength */
+    width: 10%; /* Adjust width based on strength */
     background-color: red;
 }
 
 .normal {
-    width: 50%; /* Adjust width based on strength */
-    background-color: yellow;
+    width: 30%; /* Adjust width based on strength */
+    background-color: rgb(244, 244, 25);
 }
 
 .strong {
-    width: 100%; /* Adjust width based on strength */
+    width: 55%; /* Adjust width based on strength */
     background-color: green;
 }
-

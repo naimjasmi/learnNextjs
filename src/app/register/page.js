@@ -36,7 +36,6 @@ export default function RegisterPage() {
 
     function calculatePasswordStrength(password) {
 
-
         if (password.length == 6 || /^[a-z]+$/.test(password)) {
             setPasswordStrength("weak");
         } else if (password.length >= 8 && password.length <= 11 && /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/.test(password)) {
@@ -139,10 +138,10 @@ export default function RegisterPage() {
                         </button>
                     </div>
                     <div className={styles.passwordStrengthIndicator}>
+                        <p className={styles.strengthText}>Password Strength:</p>&nbsp;
                         <div className={`${styles.strengthBar} ${styles[passwordStrength]}`}></div>
                         <span className={styles.strengthLabel}>{passwordStrength}</span>
                     </div>
-                    <br />
                     {passwordValidationError && <p className={styles.errorMessage}>{passwordValidationError}</p>}
                 </div>
                 <div className={styles.formGroup}>
