@@ -104,6 +104,9 @@
 .passwordError {
     color: red;
 }
+.errorMessageCP {
+    color: red;
+}
 
 .passwordError li {
     color: red;

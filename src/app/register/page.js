@@ -70,7 +70,7 @@ export default function RegisterPage() {
             );
             return; // Prevent further execution
         } else {
-            setPasswordValidationError("");
+            setPasswordValidationError(passwordValidationError);
         }
 
         // Check if passwords match
@@ -81,7 +81,7 @@ export default function RegisterPage() {
             setPasswordMatchError(false);
         }
 
-        // Proceed with registration logic
+        // registration logic
         router.push('/login');
     }
 
@@ -165,7 +165,7 @@ export default function RegisterPage() {
                             {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
                     </div>
-                    {passwordMatchError && <p className={styles.errorMessage}>Passwords do not match.</p>}
+                    {passwordMatchError && <p className={styles.errorMessageCP}>Passwords do not match.</p>}
                 </div>
                 <button type="submit" className={styles.button}>Register</button>
             </form>
