@@ -1,6 +1,6 @@
 /* login.module.css */
 .container {
-    max-width: 400px;
+    max-width: 490px;
     margin: 100px auto;
     /* Center the container vertically and horizontally */
     padding: 40px;
@@ -32,7 +32,7 @@
 .input {
     width: 100%;
     padding: 12px;
-    border-radius: 5px;
+    border-radius: 13px;
     border: 1px solid #ced4da;
     transition: border-color 0.3s;
 }

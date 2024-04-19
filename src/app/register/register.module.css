@@ -1,5 +1,5 @@
 .container {
-    max-width: 450px;
+    max-width: 650px;
     margin: 100px auto;
     /* Center the container vertically and horizontally */
     padding: 40px;
@@ -31,7 +31,7 @@
 .input {
     width: 100%;
     padding: 12px;
-    border-radius: 5px;
+    border-radius: 13px;
     border: 1px solid #ced4da;
     transition: border-color 0.3s;
 }
@@ -149,11 +149,11 @@
 }
 
 .normal {
-    width: 30%; /* Adjust width based on strength */
+    width: 38%; /* Adjust width based on strength */
     background-color: rgb(244, 244, 25);
 }
 
 .strong {
-    width: 55%; /* Adjust width based on strength */
+    width: 70%; /* Adjust width based on strength */
     background-color: green;
 }

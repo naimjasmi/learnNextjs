@@ -110,7 +110,12 @@ export default function RegisterPage() {
                     height={150}
                 />
             </div>
-            <h1 className={styles.title}>MSA eWorklog</h1>
+            <h1
+                className={styles.title}
+                style={{ fontFamily: 'Arial', fontSize: '36px', fontWeight: 'bold', color: '#333' }}>
+                Create Account
+            </h1>
+
             <form onSubmit={handleRegister} className={styles.form}>
                 <div className={styles.formGroup}>
                     {/*  <label htmlFor="username" className={styles.label}></label> */}
@@ -184,7 +189,7 @@ export default function RegisterPage() {
                     </div>
                     {passwordMatchError && <p className={styles.errorMessageCP}>Passwords do not match.</p>}
                 </div>
-                <button type="submit" className={styles.button}>Register</button>
+                <button type="submit" className={styles.button}>Create Account</button>
             </form>
             <div className={styles.extraLinks}>
                 <a href="#" onClick={handleForgotPassword} className={styles.link}>Forgot Password?</a><br />

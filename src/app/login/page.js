@@ -44,18 +44,23 @@ export default function LoginPage() {
                     height={150}
                 />
             </div>
-            <h1 className={styles.title}>Login</h1>
+            <h1
+                className={styles.title}
+                style={{ fontFamily: 'Arial', fontSize: '36px', fontWeight: 'bold', color: '#333' }}>
+                Login
+            </h1>
             <form onSubmit={handleLogin} className={styles.form}>
                 <div className={styles.formGroup}>
-                    <label htmlFor="loginid" className={styles.label}>Login</label>
-                    <input type="text" id="loginid" className={styles.input} />
+                    {/*  <label htmlFor="loginid" className={styles.label}>Username</label> */}
+                    <input type="text" id="loginid" placeholder="Enter your username" className={styles.input} />
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="password" className={styles.label}>Password</label>
+                    {/* <label htmlFor="password" className={styles.label}>Password</label> */}
                     <div className={styles.inputWithIcon}>
                         <input
                             type={showPassword ? "text" : "password"}
                             id="password"
+                            placeholder="Enter your password"
                             className={styles.input}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -74,7 +79,7 @@ export default function LoginPage() {
             <div className={styles.extraLinks}>
                 <a href="#" onClick={handleForgotPassword} className={styles.link}>Forgot Password?</a><br />
                 <span className={styles.linkText}>Don't have an account? </span>
-                <a href="#" onClick={handleRegister} className={styles.link}>Register Here</a>
+                <a href="#" onClick={handleRegister} className={styles.link}>Create Account</a>
             </div>
         </div>
     );
