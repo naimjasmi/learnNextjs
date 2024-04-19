@@ -8,6 +8,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function RegisterPage() {
     const router = useRouter();
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -23,7 +25,7 @@ export default function RegisterPage() {
                 <br />
                 &bull; 8 characters
                 <br />
-                &bull; 1 lower case
+                &bull; 1 lowercase letter
                 <br />
                 &bull; 1 special character
             </p>
@@ -35,7 +37,6 @@ export default function RegisterPage() {
     }, [password]);
 
     function calculatePasswordStrength(password) {
-
         if (password.length == 6 || /^[a-z]+$/.test(password)) {
             setPasswordStrength("weak");
         } else if (password.length >= 8 && password.length <= 11 && /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/.test(password)) {
@@ -112,20 +113,35 @@ export default function RegisterPage() {
             <h1 className={styles.title}>MSA eWorklog</h1>
             <form onSubmit={handleRegister} className={styles.form}>
                 <div className={styles.formGroup}>
-                    <label htmlFor="username" className={styles.label}>Username</label>
-                    <input type="text" id="username" className={styles.input} />
+                    {/*  <label htmlFor="username" className={styles.label}></label> */}
+                    <input
+                        type="text"
+                        id="username"
+                        className={styles.input}
+                        placeholder="Enter your username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="email" className={styles.label}>Email</label>
-                    <input type="email" id="email" className={styles.input} />
+                    {/* <label htmlFor="email" className={styles.label}>Email</label> */}
+                    <input
+                        type="email"
+                        id="email"
+                        className={styles.input}
+                        placeholder="Enter your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="password" className={styles.label}>Password</label>
+                    {/* <label htmlFor="password" className={styles.label}>Password</label> */}
                     <div className={styles.inputWithIcon}>
                         <input
                             type={showPassword ? "text" : "password"}
                             id="password"
                             className={`${styles.input} ${passwordValidationError && styles.error}`}
+                            placeholder="Enter your password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
@@ -145,12 +161,13 @@ export default function RegisterPage() {
                     {passwordValidationError && <p className={styles.errorMessage}>{passwordValidationError}</p>}
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="confirmPassword" className={styles.label}>Confirm Password</label>
+                    {/*  <label htmlFor="confirmPassword" className={styles.label}>Confirm Password</label> */}
                     <div className={styles.inputWithIcon}>
                         <input
                             type={showConfirmPassword ? "text" : "password"}
                             id="confirmPassword"
                             className={`${styles.input} ${passwordMatchError ? styles.error : ""}`}
+                            placeholder="Confirm your password"
                             value={confirmPassword}
                             onChange={(e) => {
                                 setConfirmPassword(e.target.value);
